@@ -229,14 +229,14 @@ html,body{background:#090d18}
 #splash .sp-mark{flex:none;display:grid;place-items:center;width:clamp(58px,18vw,76px);height:clamp(58px,18vw,76px);border-radius:28%;background:linear-gradient(135deg,#6a8bff,#4564e8);box-shadow:0 10px 38px rgba(69,100,232,.5)}
 #splash .sp-mark svg{width:56%;height:56%;overflow:visible}
 #splash .sp-bolt{fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-#splash .sp-text strong{display:block;color:#eef2ff;font-weight:800;font-size:clamp(18px,5.8vw,25px);letter-spacing:.13em;line-height:1.1;white-space:nowrap;opacity:0;animation:spText .6s cubic-bezier(.16,1,.3,1) .38s both!important}
-#splash .sp-text span{display:block;margin-top:7px;color:#64708a;font-weight:500;font-size:clamp(9.5px,3vw,13px);letter-spacing:.3em;line-height:1;white-space:nowrap;opacity:0;animation:spText .6s cubic-bezier(.16,1,.3,1) .5s both!important}
+#splash .sp-text strong{display:block;color:#eef2ff;font-weight:800;font-size:clamp(18px,5.8vw,25px);letter-spacing:.13em;line-height:1.1;white-space:nowrap;opacity:0;animation:spText .6s cubic-bezier(.16,1,.3,1) .5s both!important}
+#splash .sp-text span{display:block;margin-top:7px;color:#64708a;font-weight:500;font-size:clamp(9.5px,3vw,13px);letter-spacing:.3em;line-height:1;white-space:nowrap;opacity:0;animation:spText .6s cubic-bezier(.16,1,.3,1) .62s both!important}
 #splash .sp-mark{animation:spMark .6s cubic-bezier(.16,1,.3,1) both!important}
-#splash.sp-morph .sp-mark{animation:spMorph .78s cubic-bezier(.62,0,.18,1) .08s both!important}
+#splash.sp-morph .sp-mark{animation:spMorph .95s cubic-bezier(.62,0,.18,1) both!important}
 #splash .sp-status{position:absolute;left:0;right:0;bottom:14%;padding:0 24px;text-align:center;color:#8590a8;font:13px/1.5 system-ui,sans-serif}
 #splash .sp-status:empty{display:none}
 @keyframes spMark{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-@keyframes spMorph{from{transform:translate(var(--sx,0px),var(--sy,0px)) scale(var(--ss,1))}to{transform:none}}
+@keyframes spMorph{0%{opacity:0;transform:translate(var(--sx,0px),var(--sy,0px)) scale(var(--ss,1))}12%{opacity:1;transform:translate(var(--sx,0px),var(--sy,0px)) scale(var(--ss,1))}100%{opacity:1;transform:none}}
 @keyframes spText{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
 @keyframes spGlow{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 
@@ -266,25 +266,19 @@ html,body{background:#090d18}
 window.__splashStart=(window.performance&&performance.now)?performance.now():0;
 window.__splashMin=1350;
 (function(){var m=document.querySelector('#splash .sp-mark');if(m)m.addEventListener('animationstart',function(){if(window.__splashAnimStart==null)window.__splashAnimStart=performance.now();},{once:true});})();
-/* Android menampilkan ikon aplikasi di tengah layar penuh (±58,7% lebar layar) sebelum halaman ini tampil.
-   Animasi dimulai dari posisi & ukuran yang sama persis, lalu menyusut ke kiri sambil tulisan muncul —
-   jadi tidak ada logo yang "ganti" atau melompat. */
+/* Splash Android sekarang kosong (ikon maskable = warna latar), jadi animasi langsung muncul dari tengah layar:
+   logo besar tampil sebentar, lalu menyusut ke kiri sambil tulisan muncul. Tidak ada pergeseran vertikal. */
 (function(){
   try{
     var sp=document.getElementById('splash'),mk=sp&&sp.querySelector('.sp-mark');
-    var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
-    if(!mk||!standalone)return;
-    var W=innerWidth,H=innerHeight;
-    /* Viewport halaman lebih rendah dari layar penuh (bilah status). Logo Android ada di tengah layar penuh,
-       selisihnya ±4,75% lebar layar (hasil ukur video); dibatasi agar tidak melebihi selisih tinggi layar. */
-    var dy=Math.max(0,Math.min(W*0.0475,(screen.height-H)/2));
+    if(!mk)return;
+    var W=innerWidth;
     var lk=mk.offsetParent.getBoundingClientRect(),w=mk.offsetWidth; if(!w)return;   /* ukuran layout, tidak terpengaruh transform */
-    var mx=lk.left+mk.offsetLeft+w/2,my=lk.top+mk.offsetTop+mk.offsetHeight/2;
-    var size=W*0.3345;                    /* lebar logo pada splash Android = ±33,45% lebar layar (hasil ukur video) */
-    var cx=W/2,cy=H/2-dy;
+    var mx=lk.left+mk.offsetLeft+w/2;
+    var size=Math.min(W*0.3345,w*2.4);    /* logo awal besar di tengah */
     sp.style.setProperty('--ss',(size/w).toFixed(4));
-    sp.style.setProperty('--sx',(cx-mx).toFixed(1)+'px');
-    sp.style.setProperty('--sy',(cy-my).toFixed(1)+'px');
+    sp.style.setProperty('--sx',(W/2-mx).toFixed(1)+'px');
+    sp.style.setProperty('--sy','0px');
     sp.classList.add('sp-morph');
   }catch(e){}
 })();
@@ -301,7 +295,7 @@ window.__hideSplash=function(){
 window.addEventListener("error",function(e){var b=document.getElementById("boot");if(b&&!window.__appMounted)b.textContent="Error: "+e.message;});
 "use strict";
 const { useEffect, useMemo, useRef, useState } = React;
-const APP_VERSION = '2.3.2';
+const APP_VERSION = '2.3.4';
 const ICONS = { "Activity": [["polyline", { "points": "22 12 18 12 15 21 9 3 6 12 2 12" }]], "ArrowDownRight": [["path", { "d": "M7 7l10 10" }], ["path", { "d": "M17 7v10H7" }]], "ArrowUpRight": [["path", { "d": "M7 17L17 7" }], ["path", { "d": "M7 7h10v10" }]], "BarChart3": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M18 17V9" }], ["path", { "d": "M13 17V5" }], ["path", { "d": "M8 17v-3" }]], "BookOpen": [["path", { "d": "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" }], ["path", { "d": "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" }]], "CalendarDays": [["rect", { "x": 3, "y": 4, "width": 18, "height": 18, "rx": 2 }], ["path", { "d": "M16 2v4" }], ["path", { "d": "M8 2v4" }], ["path", { "d": "M3 10h18" }], ["path", { "d": "M8 14h.01" }], ["path", { "d": "M12 14h.01" }], ["path", { "d": "M16 14h.01" }], ["path", { "d": "M8 18h.01" }], ["path", { "d": "M12 18h.01" }], ["path", { "d": "M16 18h.01" }]], "Camera": [["path", { "d": "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" }], ["circle", { "cx": 12, "cy": 13, "r": 3 }]], "ChevronDown": [["path", { "d": "M6 9l6 6 6-6" }]], "ChevronLeft": [["path", { "d": "M15 18l-6-6 6-6" }]], "ChevronRight": [["path", { "d": "M9 18l6-6-6-6" }]], "CircleHelp": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["path", { "d": "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" }], ["path", { "d": "M12 17h.01" }]], "ClipboardPaste": [["path", { "d": "M15 2H9a1 1 0 0 0-1 1v2c0 .6.4 1 1 1h6c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1z" }], ["path", { "d": "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" }]], "Cloud": [["path", { "d": "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z" }]], "Download": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M7 10l5 5 5-5" }], ["path", { "d": "M12 15V3" }]], "FileJson": [["path", { "d": "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }], ["path", { "d": "M14 2v6h6" }], ["path", { "d": "M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1" }], ["path", { "d": "M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1" }]], "Filter": [["path", { "d": "M22 3H2l8 9.46V19l4 2v-8.54z" }]], "LineChart": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M19 9l-5 5-4-4-3 3" }]], "Plus": [["path", { "d": "M5 12h14" }], ["path", { "d": "M12 5v14" }]], "Search": [["circle", { "cx": 11, "cy": 11, "r": 8 }], ["path", { "d": "M21 21l-4.3-4.3" }]], "Settings2": [["path", { "d": "M20 7h-9" }], ["path", { "d": "M14 17H5" }], ["circle", { "cx": 17, "cy": 17, "r": 3 }], ["circle", { "cx": 7, "cy": 7, "r": 3 }]], "Share2": [["circle", { "cx": 18, "cy": 5, "r": 3 }], ["circle", { "cx": 6, "cy": 12, "r": 3 }], ["circle", { "cx": 18, "cy": 19, "r": 3 }], ["path", { "d": "M8.59 13.51l6.83 3.98" }], ["path", { "d": "M15.41 6.51l-6.82 3.98" }]], "SlidersHorizontal": [["path", { "d": "M21 4h-7" }], ["path", { "d": "M10 4H3" }], ["path", { "d": "M21 12h-9" }], ["path", { "d": "M8 12H3" }], ["path", { "d": "M21 20h-5" }], ["path", { "d": "M12 20H3" }], ["path", { "d": "M14 2v4" }], ["path", { "d": "M8 10v4" }], ["path", { "d": "M16 18v4" }]], "Target": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["circle", { "cx": 12, "cy": 12, "r": 6 }], ["circle", { "cx": 12, "cy": 12, "r": 2 }]], "Trash2": [["path", { "d": "M3 6h18" }], ["path", { "d": "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" }], ["path", { "d": "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" }], ["path", { "d": "M10 11v6" }], ["path", { "d": "M14 11v6" }]], "TrendingDown": [["path", { "d": "M22 17l-8.5-8.5-5 5L2 7" }], ["path", { "d": "M16 17h6v-6" }]], "TrendingUp": [["path", { "d": "M22 7l-8.5 8.5-5-5L2 17" }], ["path", { "d": "M16 7h6v6" }]], "Upload": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M17 8l-5-5-5 5" }], ["path", { "d": "M12 3v12" }]], "UserRound": [["circle", { "cx": 12, "cy": 8, "r": 5 }], ["path", { "d": "M20 21a8 8 0 0 0-16 0" }]], "Wallet": [["path", { "d": "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" }], ["path", { "d": "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" }]], "X": [["path", { "d": "M18 6L6 18" }], ["path", { "d": "M6 6l12 12" }]], "Zap": [["path", { "d": "M13 2L3 14h9l-1 8 10-12h-9l1-8z" }]] };
 function Icon({ name, size = 24, strokeWidth = 2, className, style }) {
     const node = ICONS[name] || [];

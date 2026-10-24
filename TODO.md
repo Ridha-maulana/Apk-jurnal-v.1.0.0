@@ -150,3 +150,10 @@
 - [x] Tulisan "Edge Journal — Jurnal Trading Forex" di bagian bawah splash Android berasal dari `name` di `manifest.webmanifest`. `name` diganti karakter tak terlihat (U+2060) agar tulisan tidak tampil; nama di layar utama tetap memakai `short_name` ("Edge Journal").
 - [x] Cache service worker dinaikkan ke `edge-journal-v4`.
 - Catatan: nama splash tersimpan di aplikasi terpasang, jadi perubahan baru terlihat setelah Chrome memperbarui aplikasi atau setelah install ulang.
+
+## Splash Android kosong, animasi langsung v2.3.4
+- [x] Penyebab "logo naik": di dalam splash Android sendiri, ikon mula-mula di y≈1004 lalu digeser sistem naik ke y=960 (42 px), kemudian animasi halaman menurunkannya lagi. Ini tidak bisa dikontrol dari kode web.
+- [x] `icon-maskable-512.png` (gambar yang dipakai Android untuk splash) diganti warna latar polos `#090d18`. Splash Android tampil layar gelap tanpa logo.
+- [x] Animasi halaman langsung muncul dari tengah layar: logo besar fade-in lalu menyusut ke kiri sambil tulisan muncul, tanpa pergeseran vertikal.
+- [x] Cache service worker dinaikkan ke `edge-journal-v5`; versi aplikasi 2.3.4.
+- Catatan: gambar splash tersimpan di aplikasi terpasang, jadi perlu install ulang agar berlaku. Jika ikon layar utama tampak kosong gelap di peluncur lain, kembalikan `icon-maskable-512.png` ke versi sebelumnya.
