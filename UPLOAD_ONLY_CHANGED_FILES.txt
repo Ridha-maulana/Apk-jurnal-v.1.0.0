@@ -1,25 +1,20 @@
-Edge Journal v2.3.1 — File yang diperbarui
+Edge Journal v2.3.2 — File yang diperbarui
 
 Perubahan:
-- Splash: animasi dimulai dari logo yang sama dengan splash Android, lalu berubah menjadi gambar logo + tulisan EDGE JOURNAL / TRADING LOGBOOK.
-- Ikon maskable baru (latar gelap + logo bolt).
-- Aplikasi terbuka lebih cepat (service worker cache lebih dulu).
+- Logo splash tidak lagi melompat naik saat animasi dimulai (posisi & ukuran awal disamakan dengan splash Android).
+- Animasi langsung berjalan, dan selalu tampil penuh.
 
-File yang perlu di-commit ulang (7 file):
+File yang perlu di-commit ulang (3 file):
   index.html
-  sw.js
-  icon-maskable-512.png
-  icon-192.png
-  icon-512.png
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
+(sw.js dan semua ikon TIDAK berubah dari v2.3.1.)
+
 Perintah:
-  git add index.html sw.js icon-maskable-512.png icon-192.png icon-512.png TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.3.1: splash morph dari ikon Android, ikon baru, SW cache-first"
+  git add index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.3.2: splash tanpa lompatan, animasi langsung"
   git push
 
-Setelah upload:
-1. Buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
-2. Splash bawaan Android memakai gambar ikon yang tersimpan di aplikasi terpasang. Agar ikon baru dipakai:
-   Backup data dulu, hapus aplikasi dari layar utama, lalu install lagi dari Chrome.
+Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
+Tidak perlu install ulang aplikasi.

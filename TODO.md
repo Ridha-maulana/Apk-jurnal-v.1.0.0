@@ -139,3 +139,9 @@
 - [x] Animasi splash dimulai dari posisi dan ukuran yang sama persis dengan splash Android (selisih ±1 px), lalu logo menyusut ke kiri dan tulisan `EDGE JOURNAL / TRADING LOGBOOK` muncul. Tidak ada logo yang berganti.
 - [x] Animasi splash dikecualikan dari aturan lama `*{animation:none!important}` (baris "Animasi dasar tetap ringan") yang mematikan semua animasi. Bagian aplikasi lain tidak berubah.
 - [x] Service worker v3: cache lebih dulu lalu perbarui di belakang layar, sehingga aplikasi terbuka cepat dan splash Android lebih singkat. Bisa dibuka offline.
+
+## Serah-terima splash tanpa lompatan v2.3.2
+- [x] Titik awal animasi disesuaikan dengan logo splash Android hasil ukur video HP: lebar ±33,45% lebar layar, tepat di tengah layar penuh. Sebelumnya logo melompat naik ±36 px dan mengecil ±12% saat halaman mengambil alih.
+- [x] Jeda awal animasi dipersingkat (0,2 s menjadi 0,08 s) sehingga logo langsung bergerak.
+- [x] Lama splash dihitung dari saat animasi benar-benar tampil (`animationstart`), bukan dari awal pemuatan, sehingga animasi selalu terlihat penuh walau halaman lambat dimuat.
+- [x] Menambahkan `preconnect` ke CDN React agar pemuatan lebih cepat.
