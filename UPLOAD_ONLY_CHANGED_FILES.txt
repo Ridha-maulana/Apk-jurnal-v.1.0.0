@@ -1,20 +1,24 @@
-Edge Journal v2.3.2 — File yang diperbarui
+Edge Journal v2.3.3 — File yang diperbarui
 
 Perubahan:
-- Logo splash tidak lagi melompat naik saat animasi dimulai (posisi & ukuran awal disamakan dengan splash Android).
-- Animasi langsung berjalan, dan selalu tampil penuh.
+- Tulisan "Edge Journal — Jurnal Trading Forex" di splash Android dihilangkan (diatur lewat manifest).
 
-File yang perlu di-commit ulang (3 file):
-  index.html
+File yang perlu di-commit ulang (4 file):
+  manifest.webmanifest
+  sw.js
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
-(sw.js dan semua ikon TIDAK berubah dari v2.3.1.)
+(index.html dan semua ikon TIDAK berubah.)
 
 Perintah:
-  git add index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.3.2: splash tanpa lompatan, animasi langsung"
+  git add manifest.webmanifest sw.js TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.3.3: hilangkan tulisan nama di splash Android"
   git push
 
-Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
-Tidak perlu install ulang aplikasi.
+Setelah upload:
+Nama splash tersimpan di aplikasi yang terpasang. Agar langsung berubah:
+1. Backup data dulu (Tools > Backup).
+2. Hapus aplikasi dari layar utama.
+3. Buka situs di Chrome, lalu Tambahkan ke layar utama / Install.
+4. Buka aplikasi 2 kali.

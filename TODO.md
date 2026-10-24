@@ -145,3 +145,8 @@
 - [x] Jeda awal animasi dipersingkat (0,2 s menjadi 0,08 s) sehingga logo langsung bergerak.
 - [x] Lama splash dihitung dari saat animasi benar-benar tampil (`animationstart`), bukan dari awal pemuatan, sehingga animasi selalu terlihat penuh walau halaman lambat dimuat.
 - [x] Menambahkan `preconnect` ke CDN React agar pemuatan lebih cepat.
+
+## Splash Android tanpa tulisan v2.3.3
+- [x] Tulisan "Edge Journal — Jurnal Trading Forex" di bagian bawah splash Android berasal dari `name` di `manifest.webmanifest`. `name` diganti karakter tak terlihat (U+2060) agar tulisan tidak tampil; nama di layar utama tetap memakai `short_name` ("Edge Journal").
+- [x] Cache service worker dinaikkan ke `edge-journal-v4`.
+- Catatan: nama splash tersimpan di aplikasi terpasang, jadi perubahan baru terlihat setelah Chrome memperbarui aplikasi atau setelah install ulang.
