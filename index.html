@@ -248,6 +248,14 @@ html,body{background:#090d18}
 .bottom-nav .nav-item:active svg{transform:translateY(-1px) scale(1.08)}
 .bottom-nav .nav-item.active{color:#d7e0ff;font-weight:700}
 .bottom-nav .nav-item.active:after{content:'';position:absolute;left:50%;top:-10px;width:26px;height:3px;margin-left:-13px;border-radius:0 0 4px 4px;background:linear-gradient(90deg,#6a8bff,#9bb2ff);box-shadow:0 3px 12px rgba(106,139,255,.85)}
+.sync-note{margin:10px 0 0;font-size:13px;line-height:1.5;color:#9aa6c4}
+.sync-note strong{color:#e6ecff;word-break:break-all}
+.sync-note.warn{color:#ffb4a8}
+.sync-status{margin:6px 0 10px;font-size:13px;font-weight:700;color:#8fa0c8}
+.sync-status.synced{color:#3ddc97}.sync-status.error,.sync-status.conflict{color:#ff9d8a}.sync-status.offline,.sync-status.dirty{color:#f3c969}
+.sync-conflict{margin:8px 0;padding:10px 12px;border:1px solid #5a3a3a;border-radius:12px;background:rgba(255,120,100,.08);font-size:13px;line-height:1.5;color:#ffd3cb}
+.sync-conflict p{margin:0 0 8px}
+.tool-card .button-row button:disabled{opacity:.5}
 @media(prefers-reduced-motion:reduce){#splash,#splash *{animation:none!important;transition:none!important}#splash .sp-text strong,#splash .sp-text span{opacity:1!important}}
 </style>
 </head>
@@ -291,11 +299,13 @@ window.__hideSplash=function(){
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="firebase-config.js"></script>
+<script type="module" src="cloud-sync.js"></script>
 <script>
 window.addEventListener("error",function(e){var b=document.getElementById("boot");if(b&&!window.__appMounted)b.textContent="Error: "+e.message;});
 "use strict";
 const { useEffect, useMemo, useRef, useState } = React;
-const APP_VERSION = '2.3.5';
+const APP_VERSION = '2.4.0';
 const ICONS = { "Activity": [["polyline", { "points": "22 12 18 12 15 21 9 3 6 12 2 12" }]], "ArrowDownRight": [["path", { "d": "M7 7l10 10" }], ["path", { "d": "M17 7v10H7" }]], "ArrowUpRight": [["path", { "d": "M7 17L17 7" }], ["path", { "d": "M7 7h10v10" }]], "BarChart3": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M18 17V9" }], ["path", { "d": "M13 17V5" }], ["path", { "d": "M8 17v-3" }]], "BookOpen": [["path", { "d": "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" }], ["path", { "d": "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" }]], "CalendarDays": [["rect", { "x": 3, "y": 4, "width": 18, "height": 18, "rx": 2 }], ["path", { "d": "M16 2v4" }], ["path", { "d": "M8 2v4" }], ["path", { "d": "M3 10h18" }], ["path", { "d": "M8 14h.01" }], ["path", { "d": "M12 14h.01" }], ["path", { "d": "M16 14h.01" }], ["path", { "d": "M8 18h.01" }], ["path", { "d": "M12 18h.01" }], ["path", { "d": "M16 18h.01" }]], "Camera": [["path", { "d": "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" }], ["circle", { "cx": 12, "cy": 13, "r": 3 }]], "ChevronDown": [["path", { "d": "M6 9l6 6 6-6" }]], "ChevronLeft": [["path", { "d": "M15 18l-6-6 6-6" }]], "ChevronRight": [["path", { "d": "M9 18l6-6-6-6" }]], "CircleHelp": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["path", { "d": "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" }], ["path", { "d": "M12 17h.01" }]], "ClipboardPaste": [["path", { "d": "M15 2H9a1 1 0 0 0-1 1v2c0 .6.4 1 1 1h6c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1z" }], ["path", { "d": "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" }]], "Cloud": [["path", { "d": "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z" }]], "Download": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M7 10l5 5 5-5" }], ["path", { "d": "M12 15V3" }]], "FileJson": [["path", { "d": "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }], ["path", { "d": "M14 2v6h6" }], ["path", { "d": "M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1" }], ["path", { "d": "M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1" }]], "Filter": [["path", { "d": "M22 3H2l8 9.46V19l4 2v-8.54z" }]], "LineChart": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M19 9l-5 5-4-4-3 3" }]], "Plus": [["path", { "d": "M5 12h14" }], ["path", { "d": "M12 5v14" }]], "Search": [["circle", { "cx": 11, "cy": 11, "r": 8 }], ["path", { "d": "M21 21l-4.3-4.3" }]], "Settings2": [["path", { "d": "M20 7h-9" }], ["path", { "d": "M14 17H5" }], ["circle", { "cx": 17, "cy": 17, "r": 3 }], ["circle", { "cx": 7, "cy": 7, "r": 3 }]], "Share2": [["circle", { "cx": 18, "cy": 5, "r": 3 }], ["circle", { "cx": 6, "cy": 12, "r": 3 }], ["circle", { "cx": 18, "cy": 19, "r": 3 }], ["path", { "d": "M8.59 13.51l6.83 3.98" }], ["path", { "d": "M15.41 6.51l-6.82 3.98" }]], "SlidersHorizontal": [["path", { "d": "M21 4h-7" }], ["path", { "d": "M10 4H3" }], ["path", { "d": "M21 12h-9" }], ["path", { "d": "M8 12H3" }], ["path", { "d": "M21 20h-5" }], ["path", { "d": "M12 20H3" }], ["path", { "d": "M14 2v4" }], ["path", { "d": "M8 10v4" }], ["path", { "d": "M16 18v4" }]], "Target": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["circle", { "cx": 12, "cy": 12, "r": 6 }], ["circle", { "cx": 12, "cy": 12, "r": 2 }]], "Trash2": [["path", { "d": "M3 6h18" }], ["path", { "d": "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" }], ["path", { "d": "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" }], ["path", { "d": "M10 11v6" }], ["path", { "d": "M14 11v6" }]], "TrendingDown": [["path", { "d": "M22 17l-8.5-8.5-5 5L2 7" }], ["path", { "d": "M16 17h6v-6" }]], "TrendingUp": [["path", { "d": "M22 7l-8.5 8.5-5-5L2 17" }], ["path", { "d": "M16 7h6v6" }]], "Upload": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M17 8l-5-5-5 5" }], ["path", { "d": "M12 3v12" }]], "UserRound": [["circle", { "cx": 12, "cy": 8, "r": 5 }], ["path", { "d": "M20 21a8 8 0 0 0-16 0" }]], "Wallet": [["path", { "d": "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" }], ["path", { "d": "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" }]], "X": [["path", { "d": "M18 6L6 18" }], ["path", { "d": "M6 6l12 12" }]], "Zap": [["path", { "d": "M13 2L3 14h9l-1 8 10-12h-9l1-8z" }]] };
 function Icon({ name, size = 24, strokeWidth = 2, className, style }) {
     const node = ICONS[name] || [];
@@ -473,7 +483,11 @@ function loadStore() {
     catch { }
     return { activeAccountId: 'gold-50', accounts: seedAccounts };
 }
-function saveStore(activeAccountId, accounts) { localStorage.setItem('edge-journal-v3', JSON.stringify({ activeAccountId, accounts })); }
+function markLocalChanged() {
+    try { const m = JSON.parse(localStorage.getItem('edge-sync-meta') || '{}'); m.dirty = true; m.localRev = (m.localRev || 0) + 1; localStorage.setItem('edge-sync-meta', JSON.stringify(m)); } catch (e) { }
+    try { if (window.cloudSync && window.cloudSync.localChanged) window.cloudSync.localChanged(); } catch (e) { }
+}
+function saveStore(activeAccountId, accounts) { localStorage.setItem('edge-journal-v3', JSON.stringify({ activeAccountId, accounts })); markLocalChanged(); }
 function normalizeAccounts(accounts) { return (accounts || []).map(a => ({ ...a, capitalHistory: Array.isArray(a.capitalHistory) ? a.capitalHistory : [] })); }
 function validateBackup(data) {
     if (!data || typeof data !== 'object' || !Array.isArray(data.accounts) || !data.accounts.length)
@@ -533,6 +547,18 @@ function App() {
     const [editingTrade, setEditingTrade] = useState(null);
     const [expanded, setExpanded] = useState(null);
     const [journalFilters, setJournalFilters] = useState({ search: '', status: 'all', side: 'all', date: '' });
+    window.__applyRemoteState = text => {
+        try {
+            const d = JSON.parse(text);
+            if (!d || !Array.isArray(d.accounts) || !d.accounts.length || d.accounts.some(a => !a || typeof a.id !== 'string' || !Array.isArray(a.trades)))
+                return false;
+            const next = normalizeAccounts(d.accounts);
+            const active = next.some(a => a.id === d.activeAccountId) ? d.activeAccountId : next[0].id;
+            localStorage.setItem('edge-journal-v3', JSON.stringify({ activeAccountId: active, accounts: next }));
+            setAccounts(next); setActiveAccountId(active);
+            return true;
+        } catch (e) { return false; }
+    };
     useEffect(() => { if (window.__hideSplash) window.__hideSplash(); }, []);
     useEffect(() => { setExpanded(null); }, [tab]);
     const activeAccount = accounts.find(a => a.id === activeAccountId) || accounts[0];
@@ -1760,6 +1786,59 @@ function TradeCard({ trade, expanded, onToggle, onDelete, onClose, onEdit }) { v
             React.createElement("button", { className: "delete-btn", onClick: e => { e.stopPropagation(); onDelete(); } },
                 React.createElement(Trash2, { size: 14 }),
                 " Hapus")))); }
+function CloudSyncCard() {
+    const [st, setSt] = useState(() => (window.cloudSync && window.cloudSync.getStatus()) || null);
+    const [email, setEmail] = useState('');
+    const [pw, setPw] = useState('');
+    const [busy, setBusy] = useState(false);
+    const [msg, setMsg] = useState('');
+    useEffect(() => {
+        let off = null, t = null, tries = 0;
+        const attach = () => { if (window.cloudSync) off = window.cloudSync.subscribe(setSt); else if (tries++ < 80) t = setTimeout(attach, 300); };
+        attach();
+        return () => { if (off) off(); clearTimeout(t); };
+    }, []);
+    async function run(fn, okMsg) {
+        setBusy(true); setMsg('');
+        try { await fn(); if (okMsg) setMsg(okMsg); } catch (e) { setMsg((e && e.message) || 'Terjadi kesalahan.'); }
+        setBusy(false);
+    }
+    const cs = window.cloudSync;
+    const head = React.createElement("div", { className: "tool-head" },
+        React.createElement("div", { className: "tool-icon green" }, React.createElement(Cloud, null)),
+        React.createElement("div", null,
+            React.createElement("h2", null, "Sinkron online"),
+            React.createElement("p", null, "Data tersimpan di akun Anda dan bisa dibuka dari browser atau HP mana pun.")));
+    if (!st) return React.createElement("div", { className: "tool-card" }, head, React.createElement("p", { className: "sync-note" }, "Memuat layanan online…"));
+    if (!st.configured) return React.createElement("div", { className: "tool-card" }, head,
+        React.createElement("p", { className: "sync-note" }, "Belum diaktifkan. Isi file firebase-config.js mengikuti PANDUAN_FIREBASE.md, lalu unggah ke GitHub."));
+    const time = st.lastSyncAt ? new Date(st.lastSyncAt).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '';
+    const label = { synced: 'Tersinkron' + (time ? ' · ' + time : ''), syncing: 'Menyinkronkan…', dirty: 'Perubahan menunggu dikirim…', offline: 'Offline — dikirim saat online', conflict: 'Perlu pilihan Anda', error: 'Gagal sinkron' }[st.state] || '';
+    if (!st.user) return React.createElement("div", { className: "tool-card" }, head,
+        React.createElement("div", { className: "calc-grid compact-calc" },
+            React.createElement("label", null, "Email",
+                React.createElement("input", { type: "email", autoComplete: "username", inputMode: "email", value: email, onChange: e => setEmail(e.target.value), placeholder: "email@anda.com" })),
+            React.createElement("label", null, "Password",
+                React.createElement("input", { type: "password", autoComplete: "current-password", value: pw, onChange: e => setPw(e.target.value), placeholder: "minimal 6 karakter" }))),
+        React.createElement("div", { className: "button-row" },
+            React.createElement("button", { className: "secondary-btn", disabled: busy || !email || !pw, onClick: () => run(() => cs.signIn(email, pw)) }, busy ? 'Memproses…' : 'Masuk'),
+            React.createElement("button", { className: "secondary-btn", disabled: busy || !email || !pw, onClick: () => run(() => cs.signUp(email, pw)) }, "Daftar"),
+            React.createElement("button", { className: "secondary-btn", disabled: busy || !email, onClick: () => run(() => cs.resetPassword(email), 'Email reset password dikirim. Periksa kotak masuk/spam.') }, "Lupa password")),
+        (msg || st.message) && React.createElement("p", { className: "sync-note warn" }, msg || st.message));
+    return React.createElement("div", { className: "tool-card" }, head,
+        React.createElement("p", { className: "sync-note" }, "Masuk sebagai ", React.createElement("strong", null, st.user.email)),
+        React.createElement("p", { className: 'sync-status ' + st.state }, label),
+        st.state === 'conflict' && React.createElement("div", { className: "sync-conflict" },
+            React.createElement("p", null, st.message),
+            React.createElement("div", { className: "button-row" },
+                React.createElement("button", { className: "secondary-btn", onClick: () => { if (window.confirm('Data di perangkat ini akan diganti dengan data cloud. Versi perangkat ini disimpan sebagai cadangan lokal. Lanjutkan?')) run(() => cs.resolveConflict('cloud')); } }, "Pakai data cloud"),
+                React.createElement("button", { className: "secondary-btn", onClick: () => { if (window.confirm('Data di cloud akan diganti dengan data perangkat ini. Lanjutkan?')) run(() => cs.resolveConflict('local')); } }, "Pakai data perangkat ini"))),
+        (st.state === 'error' || st.state === 'offline') && st.message && React.createElement("p", { className: "sync-note warn" }, st.message),
+        msg && React.createElement("p", { className: "sync-note warn" }, msg),
+        React.createElement("div", { className: "button-row" },
+            React.createElement("button", { className: "secondary-btn", disabled: busy || st.state === 'conflict', onClick: () => run(() => cs.syncNow()) }, "Sinkronkan sekarang"),
+            React.createElement("button", { className: "secondary-btn", disabled: busy, onClick: () => run(() => cs.signOut()) }, "Keluar")));
+}
 function Tools({ account, trades, onAdd, onExport, onBackup, onRestore, onNewAccount }) { const [calc, setCalc] = useState({ symbol: 'XAUUSD', entry: '', sl: '', tp: '', lots: '0.01' }); const riskDistance = Math.abs(Number(calc.entry || 0) - Number(calc.sl || 0)); const riskUsd = riskFor(calc.entry, calc.sl, calc.lots, calc.symbol); const rewardUsd = rewardFor(calc.entry, calc.tp, calc.lots, calc.symbol); return React.createElement("section", null,
     React.createElement(PageHeading, { eyebrow: "TOOLS / UTILITIES", title: "Trading Tools", description: "Kalkulator, backup, dan pengaturan akun.", action: React.createElement("button", { className: "icon-btn" },
             React.createElement(Settings2, { size: 18 })) }),
@@ -1802,6 +1881,7 @@ function Tools({ account, trades, onAdd, onExport, onBackup, onRestore, onNewAcc
                 React.createElement("strong", null, calc.entry && calc.sl ? `${(riskDistance / Number(calc.entry) * 100).toFixed(2)}%` : '—'),
                 React.createElement("small", null, "distance / entry")))),
     React.createElement("div", { className: "tool-grid" },
+        React.createElement(CloudSyncCard, null),
         React.createElement("div", { className: "tool-card" },
             React.createElement("div", { className: "tool-head" },
                 React.createElement("div", { className: "tool-icon purple" },

@@ -162,3 +162,10 @@
 - [x] Hasil ukur video: saat dibuka dari layar utama, splash Android masih menampilkan logo lama (turun-naik di y 1067 > 1008 > 960, lalu animasi halaman mulai di y 1003). Ini terjadi karena aplikasi terpasang masih memakai gambar splash lama. Saat refresh tidak ada splash Android, sehingga animasi terlihat mulus.
 - [x] `icon-maskable-512.png` diganti nama menjadi `icon-maskable-v3-512.png` (isinya warna polos `#090d18`) supaya tidak tertahan cache GitHub Pages / Chrome dan lebih mudah memicu pembaruan aplikasi. `manifest.webmanifest`, `sw.js` diperbarui. `apple-touch-icon` memakai `icon-512.png`.
 - Hapus file lama `icon-maskable-512.png` dari GitHub (tidak dipakai lagi).
+
+## Sinkron online (Firebase) v2.4.0
+- [x] Modul baru `cloud-sync.js` (Firebase Auth email/password + Cloud Firestore, SDK 10.11.1 dari CDN gstatic). Data tetap lokal; saat login perubahan dikirim ke `users/{uid}` (dipecah per 200.000 karakter) dan perubahan dari perangkat lain diterima otomatis.
+- [x] Penyelesaian bentrok: transaksi Firestore menolak tulis dengan basis usang; jika dua perangkat sama-sama berubah, pengguna diberi pilihan data cloud / data perangkat. Versi lokal disimpan di `edge-journal-pre-sync-backup` sebelum ditimpa.
+- [x] Kartu "Sinkron online" di Tools (login, daftar, lupa password, status, sinkron sekarang, keluar).
+- [x] `firebase-config.js` (diisi pengguna) dan `PANDUAN_FIREBASE.md`. Selama konfigurasi kosong aplikasi berjalan seperti sebelumnya.
+- [x] Diuji: 12 skenario mesin sinkron (2 perangkat, offline, bentrok, data besar + emoji) dan alur UI dua perangkat. Belum diuji dengan proyek Firebase sungguhan.

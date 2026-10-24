@@ -1,34 +1,24 @@
-Edge Journal v2.3.5 — File yang diperbarui
+Edge Journal v2.4.0 — Sinkron online (Firebase)
 
-Latar belakang:
-Video menunjukkan saat dibuka dari layar utama, splash Android MASIH menampilkan logo lama
-(gambar splash tersimpan di aplikasi terpasang). Saat refresh tidak ada splash Android,
-karena itu animasinya mulus. Agar sama, gambar splash harus polos (sudah disiapkan) DAN
-aplikasi terpasang harus memakai gambar itu.
-
-File yang perlu di-commit ulang (6 file):
-  icon-maskable-v3-512.png   (FILE BARU — wajib diunggah)
-  manifest.webmanifest
-  sw.js
+File yang perlu di-commit (7 file, 3 di antaranya BARU):
   index.html
+  cloud-sync.js             (BARU)
+  firebase-config.js        (BARU — isi dulu sesuai PANDUAN_FIREBASE.md langkah 5)
+  PANDUAN_FIREBASE.md       (BARU)
+  sw.js
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
-File yang perlu DIHAPUS dari GitHub:
-  icon-maskable-512.png      (lama, sudah tidak dipakai)
+(manifest.webmanifest dan semua ikon TIDAK berubah.)
 
-Perintah:
-  git rm icon-maskable-512.png
-  git add icon-maskable-v3-512.png manifest.webmanifest sw.js index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.3.5: ikon splash polos baru (anti cache)"
-  git push
+Urutan yang disarankan:
+1. Ikuti PANDUAN_FIREBASE.md langkah 1-6 (buat proyek, Rules, salin konfigurasi).
+2. Isi firebase-config.js.
+3. Commit & push:
+   git add index.html cloud-sync.js firebase-config.js PANDUAN_FIREBASE.md sw.js TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+   git commit -m "v2.4.0: sinkron online Firebase"
+   git push
+4. Buka aplikasi 2 kali, lalu Tools > Sinkron online > Daftar.
 
-Cek sebelum install ulang (di Chrome HP):
-  buka  alamat-situs-anda/icon-maskable-v3-512.png
-  hasil yang benar: layar gelap polos TANPA logo. Jika masih ada logo / 404, file belum terunggah.
-
-Lalu install ulang:
-1. Backup data dulu (Tools > Backup).
-2. Hapus aplikasi dari layar utama.
-3. Buka situs di Chrome, lalu Tambahkan ke layar utama / Install.
-4. Buka aplikasi 2 kali.
+Penting: Backup dulu (Tools > Cloud backup > Create backup) sebelum mulai.
+Aplikasi boleh diunggah dengan firebase-config.js yang masih kosong; sinkron baru aktif setelah diisi.
