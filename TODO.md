@@ -169,3 +169,11 @@
 - [x] Kartu "Sinkron online" di Tools (login, daftar, lupa password, status, sinkron sekarang, keluar).
 - [x] `firebase-config.js` (diisi pengguna) dan `PANDUAN_FIREBASE.md`. Selama konfigurasi kosong aplikasi berjalan seperti sebelumnya.
 - [x] Diuji: 12 skenario mesin sinkron (2 perangkat, offline, bentrok, data besar + emoji) dan alur UI dua perangkat. Belum diuji dengan proyek Firebase sungguhan.
+
+## Halaman masuk di awal aplikasi v2.4.1
+- [x] `AuthGate`: jika Firebase sudah dikonfigurasi, aplikasi menampilkan halaman Masuk lebih dulu (email, password, Daftar baru, Lupa password).
+- [x] Sudah masuk -> langsung ke aplikasi tanpa menunggu (penanda `edge-auth-hint`), juga saat offline. Halaman masuk muncul lagi hanya setelah "Keluar" manual di kartu Sinkron online (atau sesi login habis).
+- [x] Login baru di perangkat lain: halaman "Menyinkronkan data…" tampil dulu agar data cloud sudah dimuat sebelum aplikasi terbuka (tanpa kedip data awal). Jika terjadi konflik data, pilihan "Pakai data cloud / perangkat ini" ditampilkan langsung.
+- [x] Tombol "Lanjut tanpa masuk" (hanya untuk sesi itu) agar tidak terkunci saat lupa password / tidak ada internet. Dapat dihapus jika tidak diinginkan.
+- [x] Jika `firebase-config.js` masih kosong, tidak ada halaman masuk (aplikasi berjalan seperti sebelumnya).
+- [x] Diuji: 7 skenario di aplikasi sungguhan (pertama kali, password salah, login, buka ulang, keluar manual, lewati, perangkat kedua). Belum diuji dengan proyek Firebase sungguhan di HP.

@@ -1,24 +1,23 @@
-Edge Journal v2.4.0 — Sinkron online (Firebase)
+Edge Journal v2.4.1 — Halaman masuk di awal aplikasi
 
-File yang perlu di-commit (7 file, 3 di antaranya BARU):
+Perilaku:
+- Belum masuk  -> halaman Masuk tampil lebih dulu.
+- Sudah masuk  -> langsung ke aplikasi (tanpa halaman masuk).
+- Keluar manual di Tools > Sinkron online -> halaman Masuk muncul lagi.
+- "Lanjut tanpa masuk" tersedia agar tidak terkunci (hanya untuk sesi itu).
+
+File yang perlu di-commit (4 file):
   index.html
-  cloud-sync.js             (BARU)
-  firebase-config.js        (BARU — isi dulu sesuai PANDUAN_FIREBASE.md langkah 5)
-  PANDUAN_FIREBASE.md       (BARU)
   sw.js
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
-(manifest.webmanifest dan semua ikon TIDAK berubah.)
+(firebase-config.js, cloud-sync.js, manifest dan ikon TIDAK berubah.)
 
-Urutan yang disarankan:
-1. Ikuti PANDUAN_FIREBASE.md langkah 1-6 (buat proyek, Rules, salin konfigurasi).
-2. Isi firebase-config.js.
-3. Commit & push:
-   git add index.html cloud-sync.js firebase-config.js PANDUAN_FIREBASE.md sw.js TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-   git commit -m "v2.4.0: sinkron online Firebase"
-   git push
-4. Buka aplikasi 2 kali, lalu Tools > Sinkron online > Daftar.
+Perintah:
+  git add index.html sw.js TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.4.1: halaman masuk di awal aplikasi"
+  git push
 
-Penting: Backup dulu (Tools > Cloud backup > Create backup) sebelum mulai.
-Aplikasi boleh diunggah dengan firebase-config.js yang masih kosong; sinkron baru aktif setelah diisi.
+Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
+Anda sudah masuk, jadi aplikasi akan langsung terbuka seperti biasa.
