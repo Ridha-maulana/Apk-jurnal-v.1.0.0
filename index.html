@@ -256,23 +256,6 @@ html,body{background:#090d18}
 .sync-conflict{margin:8px 0;padding:10px 12px;border:1px solid #5a3a3a;border-radius:12px;background:rgba(255,120,100,.08);font-size:13px;line-height:1.5;color:#ffd3cb}
 .sync-conflict p{margin:0 0 8px}
 .tool-card .button-row button:disabled{opacity:.5}
-.gate{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));background:#090d18;overflow:auto}
-.gate-brand{display:flex;align-items:center;gap:14px}
-.gate-mark{display:grid;place-items:center;width:58px;height:58px;border-radius:28%;background:linear-gradient(135deg,#6a8bff,#4564e8);box-shadow:0 10px 38px rgba(69,100,232,.5);color:#fff}
-.gate-brand strong{display:block;font-size:22px;font-weight:800;letter-spacing:.13em;color:#eef2ff;line-height:1.1;white-space:nowrap}
-.gate-brand span{display:block;margin-top:6px;font-size:11px;letter-spacing:.3em;color:#64708a;white-space:nowrap}
-.gate-box{width:100%;max-width:380px;background:#111729;border:1px solid #25304f;border-radius:20px;padding:20px}
-.gate-box h1{margin:0 0 4px;font-size:22px;color:#eef2ff}
-.gate-box p{margin:0 0 6px;color:#9aa6c4;font-size:14px;line-height:1.5}
-.gate-box label{display:block;margin:12px 0 0;font-size:13px;color:#9aa6c4}
-.gate-box input{width:100%;margin-top:6px;padding:13px 14px;border-radius:12px;border:1px solid #2a3558;background:#0b1020;color:#eef2ff;font:16px Manrope,system-ui,sans-serif}
-.gate-btn{width:100%;margin-top:16px;padding:14px;border:0;border-radius:12px;background:linear-gradient(135deg,#6a8bff,#4564e8);color:#fff;font:800 16px Manrope,system-ui,sans-serif}
-.gate-btn:disabled,.gate-sec:disabled{opacity:.5}
-.gate-row{display:flex;gap:10px;margin-top:10px}
-.gate-sec{flex:1;padding:12px;border-radius:12px;border:1px solid #2a3558;background:#151d32;color:#cdd7f7;font:700 14px Manrope,system-ui,sans-serif}
-.gate-link{display:block;margin:16px auto 0;background:none;border:0;color:#7f8db3;font:13px/1.4 Manrope,system-ui,sans-serif;text-decoration:underline;text-align:center}
-.gate-err{margin:12px 0 0!important;color:#ffb4a8!important;font-size:13px!important}
-.gate-note{color:#9aa6c4;font-size:14px;margin:0}
 @media(prefers-reduced-motion:reduce){#splash,#splash *{animation:none!important;transition:none!important}#splash .sp-text strong,#splash .sp-text span{opacity:1!important}}
 </style>
 </head>
@@ -322,7 +305,7 @@ window.__hideSplash=function(){
 window.addEventListener("error",function(e){var b=document.getElementById("boot");if(b&&!window.__appMounted)b.textContent="Error: "+e.message;});
 "use strict";
 const { useEffect, useMemo, useRef, useState } = React;
-const APP_VERSION = '2.4.1';
+const APP_VERSION = '2.4.0';
 const ICONS = { "Activity": [["polyline", { "points": "22 12 18 12 15 21 9 3 6 12 2 12" }]], "ArrowDownRight": [["path", { "d": "M7 7l10 10" }], ["path", { "d": "M17 7v10H7" }]], "ArrowUpRight": [["path", { "d": "M7 17L17 7" }], ["path", { "d": "M7 7h10v10" }]], "BarChart3": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M18 17V9" }], ["path", { "d": "M13 17V5" }], ["path", { "d": "M8 17v-3" }]], "BookOpen": [["path", { "d": "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" }], ["path", { "d": "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" }]], "CalendarDays": [["rect", { "x": 3, "y": 4, "width": 18, "height": 18, "rx": 2 }], ["path", { "d": "M16 2v4" }], ["path", { "d": "M8 2v4" }], ["path", { "d": "M3 10h18" }], ["path", { "d": "M8 14h.01" }], ["path", { "d": "M12 14h.01" }], ["path", { "d": "M16 14h.01" }], ["path", { "d": "M8 18h.01" }], ["path", { "d": "M12 18h.01" }], ["path", { "d": "M16 18h.01" }]], "Camera": [["path", { "d": "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" }], ["circle", { "cx": 12, "cy": 13, "r": 3 }]], "ChevronDown": [["path", { "d": "M6 9l6 6 6-6" }]], "ChevronLeft": [["path", { "d": "M15 18l-6-6 6-6" }]], "ChevronRight": [["path", { "d": "M9 18l6-6-6-6" }]], "CircleHelp": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["path", { "d": "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" }], ["path", { "d": "M12 17h.01" }]], "ClipboardPaste": [["path", { "d": "M15 2H9a1 1 0 0 0-1 1v2c0 .6.4 1 1 1h6c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1z" }], ["path", { "d": "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" }]], "Cloud": [["path", { "d": "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z" }]], "Download": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M7 10l5 5 5-5" }], ["path", { "d": "M12 15V3" }]], "FileJson": [["path", { "d": "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }], ["path", { "d": "M14 2v6h6" }], ["path", { "d": "M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1" }], ["path", { "d": "M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1" }]], "Filter": [["path", { "d": "M22 3H2l8 9.46V19l4 2v-8.54z" }]], "LineChart": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M19 9l-5 5-4-4-3 3" }]], "Plus": [["path", { "d": "M5 12h14" }], ["path", { "d": "M12 5v14" }]], "Search": [["circle", { "cx": 11, "cy": 11, "r": 8 }], ["path", { "d": "M21 21l-4.3-4.3" }]], "Settings2": [["path", { "d": "M20 7h-9" }], ["path", { "d": "M14 17H5" }], ["circle", { "cx": 17, "cy": 17, "r": 3 }], ["circle", { "cx": 7, "cy": 7, "r": 3 }]], "Share2": [["circle", { "cx": 18, "cy": 5, "r": 3 }], ["circle", { "cx": 6, "cy": 12, "r": 3 }], ["circle", { "cx": 18, "cy": 19, "r": 3 }], ["path", { "d": "M8.59 13.51l6.83 3.98" }], ["path", { "d": "M15.41 6.51l-6.82 3.98" }]], "SlidersHorizontal": [["path", { "d": "M21 4h-7" }], ["path", { "d": "M10 4H3" }], ["path", { "d": "M21 12h-9" }], ["path", { "d": "M8 12H3" }], ["path", { "d": "M21 20h-5" }], ["path", { "d": "M12 20H3" }], ["path", { "d": "M14 2v4" }], ["path", { "d": "M8 10v4" }], ["path", { "d": "M16 18v4" }]], "Target": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["circle", { "cx": 12, "cy": 12, "r": 6 }], ["circle", { "cx": 12, "cy": 12, "r": 2 }]], "Trash2": [["path", { "d": "M3 6h18" }], ["path", { "d": "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" }], ["path", { "d": "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" }], ["path", { "d": "M10 11v6" }], ["path", { "d": "M14 11v6" }]], "TrendingDown": [["path", { "d": "M22 17l-8.5-8.5-5 5L2 7" }], ["path", { "d": "M16 17h6v-6" }]], "TrendingUp": [["path", { "d": "M22 7l-8.5 8.5-5-5L2 17" }], ["path", { "d": "M16 7h6v6" }]], "Upload": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M17 8l-5-5-5 5" }], ["path", { "d": "M12 3v12" }]], "UserRound": [["circle", { "cx": 12, "cy": 8, "r": 5 }], ["path", { "d": "M20 21a8 8 0 0 0-16 0" }]], "Wallet": [["path", { "d": "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" }], ["path", { "d": "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" }]], "X": [["path", { "d": "M18 6L6 18" }], ["path", { "d": "M6 6l12 12" }]], "Zap": [["path", { "d": "M13 2L3 14h9l-1 8 10-12h-9l1-8z" }]] };
 function Icon({ name, size = 24, strokeWidth = 2, className, style }) {
     const node = ICONS[name] || [];
@@ -1803,101 +1786,6 @@ function TradeCard({ trade, expanded, onToggle, onDelete, onClose, onEdit }) { v
             React.createElement("button", { className: "delete-btn", onClick: e => { e.stopPropagation(); onDelete(); } },
                 React.createElement(Trash2, { size: 14 }),
                 " Hapus")))); }
-function markSignedOut() {
-    try { localStorage.removeItem('edge-auth-hint'); } catch (e) { }
-    try { sessionStorage.removeItem('edge-gate-skip'); } catch (e) { }
-    try { window.dispatchEvent(new Event('edge-gate-reset')); } catch (e) { }
-}
-/* Halaman masuk di awal aplikasi. Hanya aktif jika Firebase sudah dikonfigurasi.
-   Sudah masuk -> langsung ke aplikasi (tanpa menunggu). Muncul lagi hanya setelah Keluar manual di kartu Sinkron online. */
-function AuthGate({ children }) {
-    const cfg = window.FIREBASE_CONFIG;
-    const configured = !!(cfg && cfg.apiKey && cfg.projectId);
-    const readHint = () => { try { return localStorage.getItem('edge-auth-hint') === '1'; } catch (e) { return false; } };
-    const [hint0, setHint0] = useState(readHint);
-    const [st, setSt] = useState(() => (window.cloudSync && window.cloudSync.getStatus()) || null);
-    const [skip, setSkip] = useState(() => { try { return sessionStorage.getItem('edge-gate-skip') === '1'; } catch (e) { return false; } });
-    const [entered, setEntered] = useState(false);
-    const [late, setLate] = useState(false);
-    const [email, setEmail] = useState('');
-    const [pw, setPw] = useState('');
-    const [busy, setBusy] = useState(false);
-    const [msg, setMsg] = useState('');
-
-    let view = 'app';
-    if (configured && !skip) {
-        if (!st) view = hint0 || late ? 'app' : 'check';
-        else if (st.user) {
-            if (entered || hint0 || late) view = 'app';
-            else if (st.state === 'conflict') view = 'conflict';
-            else if (st.state === 'syncing') view = 'check';
-        }
-        else if (!st.ready) view = hint0 ? 'app' : (late ? 'login' : 'check');
-        else if (hint0 && st.state === 'offline') view = 'app';
-        else view = 'login';
-    }
-    const hasUser = !!(st && st.user);
-
-    useEffect(() => {
-        if (!configured) return;
-        let off = null, t = null, tries = 0;
-        const attach = () => { if (window.cloudSync) off = window.cloudSync.subscribe(setSt); else if (tries++ < 30) t = setTimeout(attach, 200); else setLate(true); };
-        attach();
-        return () => { if (off) off(); clearTimeout(t); };
-    }, []);
-    useEffect(() => {
-        const f = () => setSkip(false);
-        window.addEventListener('edge-gate-reset', f);
-        return () => window.removeEventListener('edge-gate-reset', f);
-    }, []);
-    useEffect(() => { if (hasUser) { try { localStorage.setItem('edge-auth-hint', '1'); } catch (e) { } } }, [hasUser]);
-    useEffect(() => {
-        if (view === 'app' && hasUser) setEntered(true);
-        if (view === 'login') { setEntered(false); setHint0(false); }
-    }, [view, hasUser]);
-    useEffect(() => {
-        if (view !== 'check') return;
-        const t = setTimeout(() => setLate(true), 8000);
-        return () => clearTimeout(t);
-    }, [view]);
-    useEffect(() => { if (view !== 'app' && window.__hideSplash) window.__hideSplash(); }, [view]);
-
-    if (view === 'app') return children;
-
-    const cs = window.cloudSync;
-    async function run(fn) {
-        setBusy(true); setMsg('');
-        try { await fn(); } catch (e) { setMsg((e && e.message) || 'Terjadi kesalahan.'); }
-        setBusy(false);
-    }
-    const brand = React.createElement("div", { className: "gate-brand" },
-        React.createElement("div", { className: "gate-mark" }, React.createElement(Zap, { size: 30 })),
-        React.createElement("div", null, React.createElement("strong", null, "EDGE JOURNAL"), React.createElement("span", null, "TRADING LOGBOOK")));
-    if (view === 'check') return React.createElement("div", { className: "gate" }, brand,
-        React.createElement("p", { className: "gate-note" }, st && st.user ? 'Menyinkronkan data…' : 'Memeriksa akun…'));
-    if (view === 'conflict') return React.createElement("div", { className: "gate" }, brand,
-        React.createElement("div", { className: "gate-box" },
-            React.createElement("h1", null, "Pilih data yang dipakai"),
-            React.createElement("p", null, "Perangkat ini dan cloud sama-sama sudah memiliki data jurnal yang berbeda. Pilih salah satu."),
-            React.createElement("button", { className: "gate-btn", onClick: () => { if (window.confirm('Data di perangkat ini akan diganti dengan data cloud. Versi perangkat ini disimpan sebagai cadangan lokal. Lanjutkan?')) run(() => cs.resolveConflict('cloud')); } }, "Pakai data cloud"),
-            React.createElement("button", { className: "gate-sec", style: { width: '100%', marginTop: 10 }, onClick: () => { if (window.confirm('Data di cloud akan diganti dengan data perangkat ini. Lanjutkan?')) run(() => cs.resolveConflict('local')); } }, "Pakai data perangkat ini"),
-            msg && React.createElement("p", { className: "gate-err" }, msg)));
-    const err = msg || (st && st.state === 'offline' && st.message) || '';
-    return React.createElement("div", { className: "gate" }, brand,
-        React.createElement("form", { className: "gate-box", onSubmit: e => { e.preventDefault(); if (email && pw) run(() => cs.signIn(email, pw)); } },
-            React.createElement("h1", null, "Masuk"),
-            React.createElement("p", null, "Data jurnal Anda tersimpan online di akun ini dan otomatis muncul di perangkat mana pun."),
-            React.createElement("label", null, "Email",
-                React.createElement("input", { type: "email", name: "email", autoComplete: "username", inputMode: "email", value: email, onChange: e => setEmail(e.target.value), placeholder: "email@anda.com" })),
-            React.createElement("label", null, "Password",
-                React.createElement("input", { type: "password", name: "password", autoComplete: "current-password", value: pw, onChange: e => setPw(e.target.value), placeholder: "Password" })),
-            err && React.createElement("p", { className: "gate-err" }, err),
-            React.createElement("button", { className: "gate-btn", type: "submit", disabled: busy || !email || !pw }, busy ? 'Memproses…' : 'Masuk'),
-            React.createElement("div", { className: "gate-row" },
-                React.createElement("button", { className: "gate-sec", type: "button", disabled: busy || !email || !pw, onClick: () => run(() => cs.signUp(email, pw)) }, "Daftar baru"),
-                React.createElement("button", { className: "gate-sec", type: "button", disabled: busy || !email, onClick: () => run(async () => { await cs.resetPassword(email); setMsg('Email reset password dikirim. Periksa kotak masuk/spam.'); }) }, "Lupa password")),
-            React.createElement("button", { className: "gate-link", type: "button", onClick: () => { try { sessionStorage.setItem('edge-gate-skip', '1'); } catch (e) { } setSkip(true); } }, "Lanjut tanpa masuk (data hanya di perangkat ini)")));
-}
 function CloudSyncCard() {
     const [st, setSt] = useState(() => (window.cloudSync && window.cloudSync.getStatus()) || null);
     const [email, setEmail] = useState('');
@@ -1949,7 +1837,7 @@ function CloudSyncCard() {
         msg && React.createElement("p", { className: "sync-note warn" }, msg),
         React.createElement("div", { className: "button-row" },
             React.createElement("button", { className: "secondary-btn", disabled: busy || st.state === 'conflict', onClick: () => run(() => cs.syncNow()) }, "Sinkronkan sekarang"),
-            React.createElement("button", { className: "secondary-btn", disabled: busy, onClick: () => run(() => { markSignedOut(); return cs.signOut(); }) }, "Keluar")));
+            React.createElement("button", { className: "secondary-btn", disabled: busy, onClick: () => run(() => cs.signOut()) }, "Keluar")));
 }
 function Tools({ account, trades, onAdd, onExport, onBackup, onRestore, onNewAccount }) { const [calc, setCalc] = useState({ symbol: 'XAUUSD', entry: '', sl: '', tp: '', lots: '0.01' }); const riskDistance = Math.abs(Number(calc.entry || 0) - Number(calc.sl || 0)); const riskUsd = riskFor(calc.entry, calc.sl, calc.lots, calc.symbol); const rewardUsd = rewardFor(calc.entry, calc.tp, calc.lots, calc.symbol); return React.createElement("section", null,
     React.createElement(PageHeading, { eyebrow: "TOOLS / UTILITIES", title: "Trading Tools", description: "Kalkulator, backup, dan pengaturan akun.", action: React.createElement("button", { className: "icon-btn" },
@@ -2409,7 +2297,7 @@ function fileToDataUrl(file) { return new Promise(resolve => { if (!file)
     function go() {
         window.__appMounted = true;
         ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(ErrorBoundary, null,
-            React.createElement(AuthGate, null, React.createElement(App, null))));
+            React.createElement(App, null)));
         setTimeout(function () { if (window.__hideSplash) window.__hideSplash(); }, 1200);   // jaring pengaman
     }
     tick();
