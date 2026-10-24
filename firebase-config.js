@@ -3,10 +3,10 @@
    Selama apiKey kosong, aplikasi berjalan seperti biasa (hanya lokal). */
 
 window.FIREBASE_CONFIG = {
-  apiKey: "AIzaSyAQD3BW9KyhEp1Qy_Ckcx3vkJAUzBfv3qk",
-  authDomain: "edge-journal-da42d.firebaseapp.com",
-  projectId: "edge-journal-da42d",
-  storageBucket: "edge-journal-da42d.firebasestorage.app",
-  messagingSenderId: "346650568306",
-  appId: "1:346650568306:web:01fb4f97101dea490104eb"
+  apiKey: "AIzaSyCfC0OAh5aTPwptDQTrE1YdifDAqVtOzx4",
+  authDomain: "edge-journal-83132.firebaseapp.com",
+  projectId: "edge-journal-83132",
+  storageBucket: "edge-journal-83132.firebasestorage.app",
+  messagingSenderId: "259131331206",
+  appId: "1:259131331206:web:292a3e0b65097f5f437707"
 };
