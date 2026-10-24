@@ -157,3 +157,8 @@
 - [x] Animasi halaman langsung muncul dari tengah layar: logo besar fade-in lalu menyusut ke kiri sambil tulisan muncul, tanpa pergeseran vertikal.
 - [x] Cache service worker dinaikkan ke `edge-journal-v5`; versi aplikasi 2.3.4.
 - Catatan: gambar splash tersimpan di aplikasi terpasang, jadi perlu install ulang agar berlaku. Jika ikon layar utama tampak kosong gelap di peluncur lain, kembalikan `icon-maskable-512.png` ke versi sebelumnya.
+
+## Ikon splash baru agar tidak tertahan cache v2.3.5
+- [x] Hasil ukur video: saat dibuka dari layar utama, splash Android masih menampilkan logo lama (turun-naik di y 1067 > 1008 > 960, lalu animasi halaman mulai di y 1003). Ini terjadi karena aplikasi terpasang masih memakai gambar splash lama. Saat refresh tidak ada splash Android, sehingga animasi terlihat mulus.
+- [x] `icon-maskable-512.png` diganti nama menjadi `icon-maskable-v3-512.png` (isinya warna polos `#090d18`) supaya tidak tertahan cache GitHub Pages / Chrome dan lebih mudah memicu pembaruan aplikasi. `manifest.webmanifest`, `sw.js` diperbarui. `apple-touch-icon` memakai `icon-512.png`.
+- Hapus file lama `icon-maskable-512.png` dari GitHub (tidak dipakai lagi).

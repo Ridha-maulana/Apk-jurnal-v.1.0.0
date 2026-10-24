@@ -1,26 +1,34 @@
-Edge Journal v2.3.4 — File yang diperbarui
+Edge Journal v2.3.5 — File yang diperbarui
 
-Perubahan:
-- Splash Android dibuat kosong (layar gelap, tanpa logo) sehingga tidak ada logo yang terlihat naik.
-- Animasi langsung muncul dari tengah layar tanpa pergeseran vertikal.
+Latar belakang:
+Video menunjukkan saat dibuka dari layar utama, splash Android MASIH menampilkan logo lama
+(gambar splash tersimpan di aplikasi terpasang). Saat refresh tidak ada splash Android,
+karena itu animasinya mulus. Agar sama, gambar splash harus polos (sudah disiapkan) DAN
+aplikasi terpasang harus memakai gambar itu.
 
-File yang perlu di-commit ulang (5 file):
-  index.html
-  icon-maskable-512.png
+File yang perlu di-commit ulang (6 file):
+  icon-maskable-v3-512.png   (FILE BARU — wajib diunggah)
+  manifest.webmanifest
   sw.js
+  index.html
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
-(manifest.webmanifest, icon-192.png, icon-512.png TIDAK berubah.)
+File yang perlu DIHAPUS dari GitHub:
+  icon-maskable-512.png      (lama, sudah tidak dipakai)
 
 Perintah:
-  git add index.html icon-maskable-512.png sw.js TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.3.4: splash Android kosong, animasi langsung"
+  git rm icon-maskable-512.png
+  git add icon-maskable-v3-512.png manifest.webmanifest sw.js index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.3.5: ikon splash polos baru (anti cache)"
   git push
 
-Setelah upload (WAJIB, karena gambar splash tersimpan di aplikasi terpasang):
+Cek sebelum install ulang (di Chrome HP):
+  buka  alamat-situs-anda/icon-maskable-v3-512.png
+  hasil yang benar: layar gelap polos TANPA logo. Jika masih ada logo / 404, file belum terunggah.
+
+Lalu install ulang:
 1. Backup data dulu (Tools > Backup).
 2. Hapus aplikasi dari layar utama.
 3. Buka situs di Chrome, lalu Tambahkan ke layar utama / Install.
 4. Buka aplikasi 2 kali.
-Sebelum install ulang, splash lama (logo kecil) akan tampil bersama animasi baru dan terlihat melompat.
