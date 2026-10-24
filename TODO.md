@@ -133,3 +133,9 @@
 - [x] Getar menu bawah dipicu bersamaan dengan pindah tab (event click) sehingga selalu sinkron, termasuk di sentuhan pertama.
 - [x] Menu bawah dipercantik: efek tekan (scale) instan, ikon naik sedikit saat ditekan, indikator garis di atas tab aktif, label tab aktif lebih tebal, bayangan atas, dan `touch-action: manipulation` agar tanpa jeda ketuk.
 - [x] Cache service worker dinaikkan ke `edge-journal-v2`; versi aplikasi menjadi 2.3.0.
+
+## Splash tanpa pergantian logo v2.3.1
+- [x] Ikon maskable (dipakai Android untuk splash dan ikon layar utama) diganti: latar gelap `#090d18` + logo bolt di tengah, tanpa kotak biru besar.
+- [x] Animasi splash dimulai dari posisi dan ukuran yang sama persis dengan splash Android (selisih ±1 px), lalu logo menyusut ke kiri dan tulisan `EDGE JOURNAL / TRADING LOGBOOK` muncul. Tidak ada logo yang berganti.
+- [x] Animasi splash dikecualikan dari aturan lama `*{animation:none!important}` (baris "Animasi dasar tetap ringan") yang mematikan semua animasi. Bagian aplikasi lain tidak berubah.
+- [x] Service worker v3: cache lebih dulu lalu perbarui di belakang layar, sehingga aplikasi terbuka cepat dan splash Android lebih singkat. Bisa dibuka offline.

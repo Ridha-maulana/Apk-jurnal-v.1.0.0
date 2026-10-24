@@ -1,26 +1,25 @@
-Jurnale v2.3.0 — File yang diperbarui
+Edge Journal v2.3.1 — File yang diperbarui
 
 Perubahan:
-- Splash logo + tulisan (tanpa teks "Memuat" di atas, logo tidak lagi terlihat naik).
-- Ikon aplikasi baru (bolt outline, gradien biru).
-- Getar sentuhan pertama sudah langsung bekerja; getar menu bawah sinkron dengan pindah tab.
-- Menu bawah lebih halus dan rapi.
+- Splash: animasi dimulai dari logo yang sama dengan splash Android, lalu berubah menjadi gambar logo + tulisan EDGE JOURNAL / TRADING LOGBOOK.
+- Ikon maskable baru (latar gelap + logo bolt).
+- Aplikasi terbuka lebih cepat (service worker cache lebih dulu).
 
-File yang berubah (upload/commit hanya ini):
+File yang perlu di-commit ulang (7 file):
   index.html
   sw.js
+  icon-maskable-512.png
   icon-192.png
   icon-512.png
-  icon-maskable-512.png
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
 Perintah:
-  git add index.html sw.js icon-192.png icon-512.png icon-maskable-512.png TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.3.0: splash logo, fix first-touch haptic, nicer bottom nav"
+  git add index.html sw.js icon-maskable-512.png icon-192.png icon-512.png TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.3.1: splash morph dari ikon Android, ikon baru, SW cache-first"
   git push
 
-Catatan: ikon & splash bawaan Android (WebAPK) baru ikut berubah setelah Chrome memperbarui
-aplikasi terpasang (bisa sampai 1-2 hari). Agar langsung terlihat: hapus aplikasi dari layar
-utama lalu "Tambahkan ke layar utama / Install app" lagi. Data jurnal ada di localStorage,
-jadi lakukan Backup dulu sebelum menghapus.
+Setelah upload:
+1. Buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
+2. Splash bawaan Android memakai gambar ikon yang tersimpan di aplikasi terpasang. Agar ikon baru dipakai:
+   Backup data dulu, hapus aplikasi dari layar utama, lalu install lagi dari Chrome.
