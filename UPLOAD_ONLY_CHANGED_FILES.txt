@@ -1,19 +1,18 @@
-Edge Journal v2.5.0 — Rentang tanggal, urutan kartu, label %, login bergambar
+Edge Journal v2.5.1 — Pembagian sesi baru
 
-File yang perlu di-commit (5 file, 1 BARU):
+Perubahan:
+  Asia 06.00-12.00 | London 12.00-20.00 | New York 20.00-04.00 | Overlap 04.00-06.00 (WIB, jam entry)
+
+File yang perlu di-commit (3 file):
   index.html
-  sw.js
-  login-art.webp          (BARU - gambar halaman login)
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
-(firebase-config.js, cloud-sync.js, manifest, ikon TIDAK berubah.)
-
-Jika Anda memakai lebih dari satu repo GitHub, unggah ke semua repo yang dipakai.
+(sw.js, login-art.webp, firebase-config.js, cloud-sync.js, manifest dan ikon TIDAK berubah.)
 
 Perintah:
-  git add index.html sw.js login-art.webp TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.5.0: perbaiki rentang tanggal, urutan kartu, label persen, login bergambar"
+  git add index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.5.1: pembagian sesi Asia/London/New York/Overlap"
   git push
 
 Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).

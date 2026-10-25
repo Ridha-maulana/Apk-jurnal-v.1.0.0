@@ -191,3 +191,7 @@
 - [x] Monthly gain: setiap bulan yang punya trade menampilkan persen di atas batang. Profit hijau (+), rugi merah (-), tampilan sama.
 - [x] Halaman login memakai gambar `login-art.webp` (bidang kuas putih sebagai latar logo EDGE JOURNAL). Berkas baru, ±71 KB, dimasukkan ke cache offline.
 - [x] Diuji: alur rentang tanggal 8 langkah, urutan kartu, label % (bulan profit dan rugi), tampilan login di 2 ukuran layar, regresi login/sinkron.
+
+## Pembagian sesi baru v2.5.1
+- [x] Performa per sesi (WIB, jam entry) memakai pembagian baru: Asia 06.00–12.00, London 12.00–20.00, New York 20.00–04.00 (melewati tengah malam), Overlap 04.00–06.00. Menggantikan pembagian lama (London–New York dan "Sepi" dihapus).
+- [x] Catatan di bawah kartu ikut diperbarui. Diuji: trade pada jam 0, 3, 4, 5, 6, 11, 12, 19, 20, 23 masuk ke sesi yang benar, total 10 dari 10 posisi.
