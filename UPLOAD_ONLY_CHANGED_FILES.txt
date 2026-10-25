@@ -1,6 +1,4 @@
-Edge Journal v2.6.0 — Menu bawah 5 slot + halaman Akun
-
-Urutan menu bawah: Performance | My Journal | [+ Tambah posisi] | Tools | Akun
+Edge Journal v2.7.0 — Animasi menu bawah gaya Material + Tools lebih ringkas
 
 File yang perlu di-commit (3 file):
   index.html
@@ -11,7 +9,7 @@ File yang perlu di-commit (3 file):
 
 Perintah:
   git add index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.6.0: menu bawah 5 slot, tombol tambah posisi, halaman Akun"
+  git commit -m "v2.7.0: animasi menu bawah gaya pil, hapus kartu ganda di Tools"
   git push
 
 Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).

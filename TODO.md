@@ -202,3 +202,9 @@
 - [x] Menu Akun (ikon orang, ada tulisan): halaman baru berisi kartu Sinkron online (masuk/keluar, status), kartu Akun trading (nama, saldo, jumlah trade; tombol Kelola/ganti akun, Deposit/WD, Tambah akun, Backup), dan versi aplikasi. Kartu di Tools tetap ada.
 - [x] Ikon lama (Performance, My Journal, Tools) tidak diubah. Lebar menu menyesuaikan 5 slot; layar ≤380px memakai tulisan lebih kecil.
 - [x] Diuji di layar 390 dan 360: urutan, tombol + tepat di tengah, tidak ada tulisan terpotong, semua menu membuka halaman yang benar, regresi login/sinkron/Advanced Statistics lolos.
+
+## Menu bawah gaya Material + Tools lebih ringkas v2.7.0
+- [x] Animasi menu bawah mengikuti referensi video (Google Play): penanda aktif berupa pil hanya di belakang ikon (58×30 px), ada jarak 4 px ke tulisan, pil melebar dari tengah saat dipilih dan mengecil saat ditinggalkan (±0,24 detik), ikon sedikit memantul. Kotak penanda lama yang membungkus ikon + tulisan dan garis di atas tab dihapus.
+- [x] Tombol tekan (belum aktif) menampilkan pil abu-abu sempit seperti efek tekan Material.
+- [x] Tools tidak lagi menampilkan kartu Sinkron online dan Account management karena sudah ada di halaman Akun. Tools kini: Risk calculator, Cloud backup, Export & share.
+- [x] Diuji: pil sejajar dengan ikon (selisih 0 px), urutan frame animasi, navigasi 5 menu di layar 390 dan 360, isi Tools dan Akun.
