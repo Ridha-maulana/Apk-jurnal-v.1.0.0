@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panduan Firebase Bergambar — Edge Journal</title>
+<style>
+:root{--bg:#f4f6fb;--fg:#111729;--card:#fff;--mut:#5b6785;--bd:#dde3f0;--acc:#4564e8;--ok:#16a34a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#090d18;--fg:#eef2ff;--card:#111729;--mut:#9aa6c4;--bd:#25304f}}
+:root[data-theme="dark"]{--bg:#090d18;--fg:#eef2ff;--card:#111729;--mut:#9aa6c4;--bd:#25304f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:6px 0}
+.sub{color:var(--mut);margin:0 0 10px}
+.note{background:var(--card);border:1px dashed var(--bd);border-radius:12px;padding:10px 12px;font-size:14px;color:var(--mut)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:8px 0;font-size:14px;font-weight:700}
+.bar i{display:block;height:6px;border-radius:9px;background:var(--bd);margin-top:6px;overflow:hidden}
+.bar i b{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.s{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin:14px 0}
+.s h2{font-size:18px;margin:0 0 6px;display:flex;gap:10px;align-items:center}
+.n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px}
+.s p{margin:6px 0}
+.done{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:14px;color:var(--mut)}
+.done input{width:20px;height:20px}
+.s.ok{border-color:var(--ok)}
+.s.ok .n{background:var(--ok)}
+.m{background:#f3f4f8;color:#202124;border:1px solid #cfd4e0;border-radius:12px;padding:8px;margin:10px 0;font:12px/1.35 system-ui,sans-serif;overflow:hidden}
+.m .u{background:#e2e5ee;border-radius:99px;padding:3px 10px;margin-bottom:6px;color:#444;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m .r{display:flex;align-items:center;gap:6px;margin:6px 0;flex-wrap:wrap}
+.m .t{font-weight:700;font-size:13px}
+.m .bx,.m .g{background:#fff;border:1px solid #cfd4e0;border-radius:8px;padding:7px 10px}
+.m .g{color:#555}
+.m .bt{background:#1a73e8;color:#fff;border-radius:8px;padding:7px 12px;font-weight:700}
+.m .sw{background:#cfd4e0;border-radius:99px;padding:3px 12px;color:#444}
+.m .sw.on{background:#1a73e8;color:#fff}
+.m .cols{display:grid;grid-template-columns:38% 1fr;gap:8px}
+.m .sd{background:#fff;border-radius:8px;padding:4px 6px}
+.m .code{background:#1f2430;color:#9fe0b0;border-radius:8px;padding:8px;font:11px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-all}
+.h{outline:3px solid #ff3b30;outline-offset:2px;animation:p 1.4s infinite}
+@keyframes p{50%{outline-color:#ffb3ad}}
+.tip{background:#ff3b30;color:#fff;border-radius:99px;padding:1px 8px;font-size:11px;font-weight:700}
+pre.c{background:#1f2430;color:#d6e2ff;border-radius:12px;padding:12px;font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-all;margin:8px 0;max-height:260px;overflow:auto}
+button.k{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:11px 16px;font:700 15px system-ui;min-height:44px}
+button.k.l{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+textarea,input.i{width:100%;background:var(--bg);color:var(--fg);border:1px solid var(--bd);border-radius:12px;padding:10px;font:14px ui-monospace,Menlo,monospace}
+textarea{min-height:130px}
+.ck{font-size:14px;margin:8px 0;color:var(--mut)}.ck b{color:var(--ok)}.ck u{color:#e5484d;text-decoration:none;font-weight:700}
+.ph{max-width:260px;margin:10px auto}
+@media(prefers-reduced-motion:reduce){.h{animation:none}}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>🔥 Panduan Firebase Bergambar</h1>
+<p class="sub">Supaya data jurnal Anda tersimpan online dan bisa dibuka dari mana saja. Ikuti dari langkah 1 sampai 10, tekan kotak “Selesai” di tiap langkah.</p>
+<div class="note"><b>Catatan:</b> gambar di bawah adalah <b>ilustrasi letak tombol</b>, bukan tangkapan layar asli. Tampilan Firebase bisa sedikit berbeda, jadi cari <b>tulisan yang sama</b> dengan yang ditandai <b style="color:#ff3b30">lingkaran merah</b>. Gunakan HP atau komputer; lebih mudah di komputer.</div>
+<div class="bar"><span id="pc">0 dari 10 langkah selesai</span><i><b id="pb"></b></i></div>
+<div id="steps"></div>
+<p class="note">Selesai! Kalau ada langkah yang layarnya tidak sama, kirim tangkapan layar ke Claude dan akan dibantu.</p>
+</div>
+<script>
+var R=function(){return '<div class="r">'+[].join.call(arguments,'')+'</div>'};
+var P=function(c,t,h){return '<span class="'+c+(h?' h':'')+'">'+t+'</span>'+(h?'<b class="tip">'+(h===1?'Tekan di sini':h)+'</b>':'')};
+var E=function(c,t,h){return R(P(c,t,h))};
+var bar=function(u){return '<div class="u">🔒 '+u+'</div>'};
+var M=function(x){return '<div class="m">'+x+'</div>'};
+var RULES="rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /users/{uid} {\n      allow read, write: if request.auth != null && request.auth.uid == uid;\n      match /chunks/{chunkId} {\n        allow read, write: if request.auth != null && request.auth.uid == uid;\n      }\n    }\n  }\n}";
+var steps=[
+{t:'Buka Firebase dan buat proyek',d:'Buka <b>console.firebase.google.com</b> di browser, masuk dengan akun Google, lalu tekan <b>“Create a project”</b>.',
+ m:[M(bar('console.firebase.google.com')+E('t','Selamat datang di Firebase')+E('bt','＋ Create a project',1))]},
+{t:'Beri nama proyek',d:'Ketik nama <b>edge-journal</b>, tekan <b>Continue</b>. Di layar berikutnya <b>matikan Google Analytics</b> (geser sampai abu-abu), lalu tekan <b>Create project</b>. Tunggu sampai selesai, tekan <b>Continue</b>.',
+ m:[M(E('t','Project name')+E('bx','edge-journal','Ketik nama ini')+E('bt','Continue',1)),M(E('t','Google Analytics for your project')+R(P('sw','○ Off','Harus abu-abu / Off'))+E('bt','Create project',1))]},
+{t:'Buka menu Authentication',d:'Di menu kiri tekan <b>Build</b> (kalau terlipat), lalu <b>Authentication</b>, lalu tombol <b>Get started</b>. Di HP menu kiri ada di ikon ☰ pojok kiri atas.',
+ m:[M('<div class="cols"><div class="sd">'+E('g','🏠 Project overview')+E('g','Build ▾')+E('g','🔑 Authentication','① Tekan')+E('g','Firestore Database')+'</div><div>'+E('t','Authentication')+E('bt','Get started','② Lalu ini')+'</div></div>')]},
+{t:'Aktifkan login Email/Password',d:'Buka tab <b>Sign-in method</b>, pilih <b>Email/Password</b>, nyalakan <b>Enable</b>, lalu tekan <b>Save</b>.',
+ m:[M(R(P('g','Users'),P('g','Sign-in method','① Tekan'),P('g','Settings'))+E('bx','✉ Email/Password','② Pilih ini')),M(E('t','Email/Password')+R(P('sw on','● Enable','Nyalakan (biru)'))+E('bt','Save',1))]},
+{t:'Buat database Firestore',d:'Menu kiri <b>Build → Firestore Database → Create database</b>. Pilih lokasi <b>Jakarta (asia-southeast2)</b> atau Singapore. <b>Lokasi tidak bisa diganti nanti.</b> Pilih <b>Production mode</b>, lalu <b>Create</b>.',
+ m:[M(E('t','Create database')+R(P('g','Edition: Standard'))+R(P('bx','Location: asia-southeast2 (Jakarta)','① Pilih Jakarta/Singapore'))+R(P('bx','◉ Start in production mode','② Pilih ini'))+E('bt','Create','③ Lalu ini'))]},
+{t:'Pasang aturan keamanan (WAJIB)',d:'Di Firestore buka tab <b>Rules</b>. <b>Hapus semua tulisan lama</b>, tempel kode di bawah (tekan <b>Salin</b> dulu), lalu tekan <b>Publish</b>. Tanpa langkah ini data Anda tidak aman.',
+ m:[M(R(P('g','Data'),P('g','Rules','① Buka tab ini'),P('g','Usage'))+'<div class="code">rules_version = \'2\';\nservice cloud.firestore {\n  ... ② tempel kode di sini ...\n}</div>'+E('bt','Publish','③ Terakhir tekan ini'))],
+ x:'<pre class="c" id="rl"></pre><button class="k" onclick="cp(RULES,this)">Salin</button>'},
+{t:'Ambil konfigurasi aplikasi web',d:'Tekan ikon roda gigi <b>⚙</b> di kiri atas → <b>Project settings</b>. Gulir ke <b>Your apps</b>, tekan ikon web <b>&lt;/&gt;</b>, beri nama <b>edge-journal</b>, tekan <b>Register app</b>. Akan tampil kode berisi <b>firebaseConfig</b>: <b>salin semuanya</b> (tahan layar lalu pilih Salin).',
+ m:[M(R(P('g','⚙ Project settings','① Tekan roda gigi'))),M(E('t','Your apps')+R(P('bx','&lt;/&gt; Web','② Pilih ikon ini'))+E('bt','Register app',1)),M('<div class="code">const firebaseConfig = {\n  apiKey: "AIza…",\n  authDomain: "edge-journal-….firebaseapp.com",\n  projectId: "edge-journal-…",\n  …\n};</div>'+R(P('g','Salin semua bagian ini','③ Salin kode ini')))]},
+{t:'Buat file firebase-config.js otomatis',d:'Tempel kode yang tadi Anda salin ke kotak ini, tekan <b>Buat file</b>, lalu <b>Salin hasilnya</b>. Di GitHub: buka file <b>firebase-config.js</b> → ikon pensil <b>✏</b> → hapus isi lama → tempel → <b>Commit changes</b>.',
+ m:[M(bar('github.com/NAMA/REPO/blob/main/firebase-config.js')+R(P('g','✏ Edit this file','① Tekan pensil'))+E('code','window.FIREBASE_CONFIG = { … ② tempel hasil di sini }')+E('bt','Commit changes','③ Lalu tekan ini'))],
+ x:'<textarea id="gi" placeholder="Tempel firebaseConfig dari Firebase di sini…"></textarea><p><button class="k" onclick="gen()">Buat file</button></p><div id="gs" class="ck"></div><pre class="c" id="go" hidden></pre><button class="k l" id="gc" hidden onclick="cp(document.getElementById(\'go\').textContent,this)">Salin</button>'},
+{t:'Izinkan alamat GitHub Pages Anda',d:'Di Firebase buka <b>Authentication → Settings → Authorized domains → Add domain</b>. Ketik alamat GitHub Pages Anda, lalu tekan <b>Add</b>.',
+ m:[M(R(P('g','Users'),P('g','Sign-in method'),P('g','Settings','① Tekan Settings'))+E('t','Authorized domains')+E('bt','Add domain','② Tekan')+E('bx','nama.github.io','③ Ketik alamat Anda'))],
+ x:'<p class="ck">Ketik nama akun GitHub Anda:</p><input class="i" id="gu" placeholder="contoh: budi123" oninput="dm()"><pre class="c" id="gd" hidden></pre><button class="k l" id="gdc" hidden onclick="cp(document.getElementById(\'gd\').textContent,this)">Salin</button>'},
+{t:'Unggah ke GitHub dan buka aplikasi',d:'<b>Backup dulu</b> di aplikasi (Tools → Cloud backup → Create backup). Lalu unggah file dari zip ke GitHub seperti biasa. Tunggu 1–2 menit, lalu buka aplikasi <b>dua kali</b>.',
+ m:[M('<div class="ph">'+E('t','Tools')+'<div class="g" style="margin:6px 0">'+E('t','☁ Sinkron online')+E('bx','email@anda.com')+E('bx','••••••')+R(P('g','Masuk'),P('bt','Daftar','Pertama kali: tekan Daftar'))+'</div></div>')]},
+{t:'Daftar dan selesai 🎉',d:'Buka <b>Tools → Sinkron online</b>, isi email dan password (minimal 6 huruf), tekan <b>Daftar</b>. Status hijau <b>“Tersinkron”</b> berarti data Anda sudah online. Di HP/browser lain, buka alamat yang sama → <b>Masuk</b>. <b>Tips:</b> setelah Anda terdaftar, matikan pendaftaran baru di Authentication → Settings → User actions (jika ada).',
+ m:[]}
+];
+var h='';
+steps.forEach(function(s,i){h+='<div class="s" id="s'+i+'"><h2><span class="n">'+(i+1)+'</span>'+s.t+'</h2><p>'+s.d+'</p>'+s.m.join('')+(s.x||'')+'<label class="done"><input type="checkbox" onchange="tk('+i+',this.checked)"> Selesai langkah ini</label></div>'});
+document.getElementById('steps').innerHTML=h;
+document.getElementById('rl').textContent=RULES;
+var st={};
+try{st=JSON.parse(localStorage.getItem('fbg')||'{}')}catch(e){}
+function paint(){var n=0;steps.forEach(function(_,i){var c=!!st[i];if(c)n++;var el=document.getElementById('s'+i);el.classList.toggle('ok',c);el.querySelector('input').checked=c});document.getElementById('pc').textContent=n+' dari '+steps.length+' langkah selesai';document.getElementById('pb').style.width=(n/steps.length*100)+'%'}
+function tk(i,v){st[i]=v;try{localStorage.setItem('fbg',JSON.stringify(st))}catch(e){}paint()}
+paint();
+async function cp(t,b){var ok=true;try{await navigator.clipboard.writeText(t)}catch(e){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{ok=document.execCommand('copy')}catch(_){ok=false}a.remove()}
+ var o=b.textContent;b.textContent=ok?'✓ Tersalin':'Tahan teks lalu pilih Salin';setTimeout(function(){b.textContent=o},2200)}
+function gen(){var t=document.getElementById('gi').value,k=['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId'],o={},miss=[];
+ k.forEach(function(n){var m=t.match(new RegExp(n+'\\s*:\\s*["\u201c\u201d\']([^"\u201c\u201d\']+)["\u201c\u201d\']'));if(m)o[n]=m[1];else miss.push(n)});
+ var s=document.getElementById('gs'),out=document.getElementById('go'),c=document.getElementById('gc');
+ if(!o.apiKey||!o.projectId){s.innerHTML='<u>Belum lengkap.</u> apiKey dan projectId tidak ditemukan. Salin ulang seluruh kode firebaseConfig dari Firebase.';out.hidden=c.hidden=true;return}
+ var f='window.FIREBASE_CONFIG = {\n'+k.filter(function(n){return o[n]}).map(function(n){return '  '+n+': "'+o[n]+'"'}).join(',\n')+'\n};\n';
+ out.textContent=f;out.hidden=c.hidden=false;
+ s.innerHTML='<b>✓ Berhasil.</b> Ditemukan: '+k.filter(function(n){return o[n]}).join(', ')+(miss.length?'<br>Tidak ada (boleh): '+miss.join(', '):'')+'<br>Sekarang tekan Salin, lalu tempel ke firebase-config.js di GitHub.'}
+function dm(){var u=document.getElementById('gu').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,''),p=document.getElementById('gd'),c=document.getElementById('gdc');
+ p.hidden=c.hidden=!u;p.textContent=u+'.github.io'}
+</script>
+</body>
+</html>
