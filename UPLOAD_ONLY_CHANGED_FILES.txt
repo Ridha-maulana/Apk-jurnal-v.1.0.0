@@ -1,23 +1,19 @@
-Edge Journal v2.4.1 — Halaman masuk di awal aplikasi
+Edge Journal v2.5.0 — Rentang tanggal, urutan kartu, label %, login bergambar
 
-Perilaku:
-- Belum masuk  -> halaman Masuk tampil lebih dulu.
-- Sudah masuk  -> langsung ke aplikasi (tanpa halaman masuk).
-- Keluar manual di Tools > Sinkron online -> halaman Masuk muncul lagi.
-- "Lanjut tanpa masuk" tersedia agar tidak terkunci (hanya untuk sesi itu).
-
-File yang perlu di-commit (4 file):
+File yang perlu di-commit (5 file, 1 BARU):
   index.html
   sw.js
+  login-art.webp          (BARU - gambar halaman login)
   TODO.md
   UPLOAD_ONLY_CHANGED_FILES.txt
 
-(firebase-config.js, cloud-sync.js, manifest dan ikon TIDAK berubah.)
+(firebase-config.js, cloud-sync.js, manifest, ikon TIDAK berubah.)
+
+Jika Anda memakai lebih dari satu repo GitHub, unggah ke semua repo yang dipakai.
 
 Perintah:
-  git add index.html sw.js TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.4.1: halaman masuk di awal aplikasi"
+  git add index.html sw.js login-art.webp TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
+  git commit -m "v2.5.0: perbaiki rentang tanggal, urutan kartu, label persen, login bergambar"
   git push
 
 Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
-Anda sudah masuk, jadi aplikasi akan langsung terbuka seperti biasa.

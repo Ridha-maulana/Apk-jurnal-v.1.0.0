@@ -125,9 +125,69 @@
 - [x] Advanced Statistics dan Trader DNA tetap tidak memberi getar pada tombol maupun diagram.
 - [x] Versi aplikasi dinaikkan menjadi 2.2.0.
 
+## Splash, haptic, dan menu bawah v2.3.0
+- [x] Layar pembuka kini menampilkan logo + tulisan `EDGE JOURNAL / TRADING LOGBOOK` tepat di tengah layar, dengan animasi halus (logo muncul, bolt tergambar, tulisan menyusul) lalu memudar ke aplikasi. Teks "Memuat Edge Journal…" di bagian atas yang membuat logo terlihat naik dihapus.
+- [x] Font Google tidak lagi memblokir tampilan pertama sehingga splash muncul langsung.
+- [x] Ikon aplikasi (`icon-192.png`, `icon-512.png`, `icon-maskable-512.png`) diganti ke logo bolt outline bergradien biru sesuai referensi.
+- [x] Getar sentuhan pertama diperbaiki: Chrome memblokir `navigator.vibrate()` sebelum ada user activation (untuk sentuhan baru terjadi saat jari diangkat). Jika belum ada aktivasi, getar ditunda ke `pointerup`; setelah itu getar langsung di `pointerdown`.
+- [x] Getar menu bawah dipicu bersamaan dengan pindah tab (event click) sehingga selalu sinkron, termasuk di sentuhan pertama.
+- [x] Menu bawah dipercantik: efek tekan (scale) instan, ikon naik sedikit saat ditekan, indikator garis di atas tab aktif, label tab aktif lebih tebal, bayangan atas, dan `touch-action: manipulation` agar tanpa jeda ketuk.
+- [x] Cache service worker dinaikkan ke `edge-journal-v2`; versi aplikasi menjadi 2.3.0.
 
-## Performance detail v2.4.2
-- [x] Kontrol Periode tampil di dalam halaman detail Advanced Statistics dan Trader DNA masing-masing, dengan pilihan All time, Year-to-date, Weekly, Monthly, dan Custom date range.
-- [x] Urutan tiga kartu awal Advanced Statistics diubah menjadi Kalender, Monthly gain, lalu Growth.
-- [x] Monthly gain menampilkan persentase setiap bulan dengan batang hijau untuk profit dan merah untuk rugi; ringkasan Gain, Profit, Trades, dan Win rate tetap mengikuti bulan terpilih.
-- [x] Source arsip v2.4.1 yang memuat Firebase sync dipertahankan sebagai basis update.
+## Splash tanpa pergantian logo v2.3.1
+- [x] Ikon maskable (dipakai Android untuk splash dan ikon layar utama) diganti: latar gelap `#090d18` + logo bolt di tengah, tanpa kotak biru besar.
+- [x] Animasi splash dimulai dari posisi dan ukuran yang sama persis dengan splash Android (selisih ±1 px), lalu logo menyusut ke kiri dan tulisan `EDGE JOURNAL / TRADING LOGBOOK` muncul. Tidak ada logo yang berganti.
+- [x] Animasi splash dikecualikan dari aturan lama `*{animation:none!important}` (baris "Animasi dasar tetap ringan") yang mematikan semua animasi. Bagian aplikasi lain tidak berubah.
+- [x] Service worker v3: cache lebih dulu lalu perbarui di belakang layar, sehingga aplikasi terbuka cepat dan splash Android lebih singkat. Bisa dibuka offline.
+
+## Serah-terima splash tanpa lompatan v2.3.2
+- [x] Titik awal animasi disesuaikan dengan logo splash Android hasil ukur video HP: lebar ±33,45% lebar layar, tepat di tengah layar penuh. Sebelumnya logo melompat naik ±36 px dan mengecil ±12% saat halaman mengambil alih.
+- [x] Jeda awal animasi dipersingkat (0,2 s menjadi 0,08 s) sehingga logo langsung bergerak.
+- [x] Lama splash dihitung dari saat animasi benar-benar tampil (`animationstart`), bukan dari awal pemuatan, sehingga animasi selalu terlihat penuh walau halaman lambat dimuat.
+- [x] Menambahkan `preconnect` ke CDN React agar pemuatan lebih cepat.
+
+## Splash Android tanpa tulisan v2.3.3
+- [x] Tulisan "Edge Journal — Jurnal Trading Forex" di bagian bawah splash Android berasal dari `name` di `manifest.webmanifest`. `name` diganti karakter tak terlihat (U+2060) agar tulisan tidak tampil; nama di layar utama tetap memakai `short_name` ("Edge Journal").
+- [x] Cache service worker dinaikkan ke `edge-journal-v4`.
+- Catatan: nama splash tersimpan di aplikasi terpasang, jadi perubahan baru terlihat setelah Chrome memperbarui aplikasi atau setelah install ulang.
+
+## Splash Android kosong, animasi langsung v2.3.4
+- [x] Penyebab "logo naik": di dalam splash Android sendiri, ikon mula-mula di y≈1004 lalu digeser sistem naik ke y=960 (42 px), kemudian animasi halaman menurunkannya lagi. Ini tidak bisa dikontrol dari kode web.
+- [x] `icon-maskable-512.png` (gambar yang dipakai Android untuk splash) diganti warna latar polos `#090d18`. Splash Android tampil layar gelap tanpa logo.
+- [x] Animasi halaman langsung muncul dari tengah layar: logo besar fade-in lalu menyusut ke kiri sambil tulisan muncul, tanpa pergeseran vertikal.
+- [x] Cache service worker dinaikkan ke `edge-journal-v5`; versi aplikasi 2.3.4.
+- Catatan: gambar splash tersimpan di aplikasi terpasang, jadi perlu install ulang agar berlaku. Jika ikon layar utama tampak kosong gelap di peluncur lain, kembalikan `icon-maskable-512.png` ke versi sebelumnya.
+
+## Ikon splash baru agar tidak tertahan cache v2.3.5
+- [x] Hasil ukur video: saat dibuka dari layar utama, splash Android masih menampilkan logo lama (turun-naik di y 1067 > 1008 > 960, lalu animasi halaman mulai di y 1003). Ini terjadi karena aplikasi terpasang masih memakai gambar splash lama. Saat refresh tidak ada splash Android, sehingga animasi terlihat mulus.
+- [x] `icon-maskable-512.png` diganti nama menjadi `icon-maskable-v3-512.png` (isinya warna polos `#090d18`) supaya tidak tertahan cache GitHub Pages / Chrome dan lebih mudah memicu pembaruan aplikasi. `manifest.webmanifest`, `sw.js` diperbarui. `apple-touch-icon` memakai `icon-512.png`.
+- Hapus file lama `icon-maskable-512.png` dari GitHub (tidak dipakai lagi).
+
+## Sinkron online (Firebase) v2.4.0
+- [x] Modul baru `cloud-sync.js` (Firebase Auth email/password + Cloud Firestore, SDK 10.11.1 dari CDN gstatic). Data tetap lokal; saat login perubahan dikirim ke `users/{uid}` (dipecah per 200.000 karakter) dan perubahan dari perangkat lain diterima otomatis.
+- [x] Penyelesaian bentrok: transaksi Firestore menolak tulis dengan basis usang; jika dua perangkat sama-sama berubah, pengguna diberi pilihan data cloud / data perangkat. Versi lokal disimpan di `edge-journal-pre-sync-backup` sebelum ditimpa.
+- [x] Kartu "Sinkron online" di Tools (login, daftar, lupa password, status, sinkron sekarang, keluar).
+- [x] `firebase-config.js` (diisi pengguna) dan `PANDUAN_FIREBASE.md`. Selama konfigurasi kosong aplikasi berjalan seperti sebelumnya.
+- [x] Diuji: 12 skenario mesin sinkron (2 perangkat, offline, bentrok, data besar + emoji) dan alur UI dua perangkat. Belum diuji dengan proyek Firebase sungguhan.
+
+## Halaman masuk di awal aplikasi v2.4.1
+- [x] `AuthGate`: jika Firebase sudah dikonfigurasi, aplikasi menampilkan halaman Masuk lebih dulu (email, password, Daftar baru, Lupa password).
+- [x] Sudah masuk -> langsung ke aplikasi tanpa menunggu (penanda `edge-auth-hint`), juga saat offline. Halaman masuk muncul lagi hanya setelah "Keluar" manual di kartu Sinkron online (atau sesi login habis).
+- [x] Login baru di perangkat lain: halaman "Menyinkronkan data…" tampil dulu agar data cloud sudah dimuat sebelum aplikasi terbuka (tanpa kedip data awal). Jika terjadi konflik data, pilihan "Pakai data cloud / perangkat ini" ditampilkan langsung.
+- [x] Tombol "Lanjut tanpa masuk" (hanya untuk sesi itu) agar tidak terkunci saat lupa password / tidak ada internet. Dapat dihapus jika tidak diinginkan.
+- [x] Jika `firebase-config.js` masih kosong, tidak ada halaman masuk (aplikasi berjalan seperti sebelumnya).
+- [x] Diuji: 7 skenario di aplikasi sungguhan (pertama kali, password salah, login, buka ulang, keluar manual, lewati, perangkat kedua). Belum diuji dengan proyek Firebase sungguhan di HP.
+
+## Diagnosis sinkron + SW lebih kuat v2.4.2
+- [x] Kartu Sinkron online saat belum aktif menampilkan diagnosis: alamat halaman, apakah `firebase-config.js` terbaca, apiKey/projectId terisi, versi aplikasi. Tombol "Muat ulang bersih" menghapus cache aplikasi + service worker tanpa menghapus data jurnal.
+- [x] Alamat aplikasi ditampilkan di kartu saat sudah masuk (untuk membandingkan antar browser).
+- [x] Service worker v9: pasang ulang berkas dengan `cache:'reload'`, pembaruan di belakang layar memakai `cache:'no-cache'`, dan fallback ke `index.html` hanya untuk navigasi (sebelumnya berkas lain yang gagal ikut dibalas HTML).
+- Catatan: penyebab pasti Brave belum aktif belum diketahui; diagnosis ini untuk membedakan antara berkas diblokir, cache lama, atau repo/alamat yang berbeda.
+
+## Rentang tanggal, urutan kartu, label %, login bergambar v2.5.0
+- [x] Penyebab kotak "Custom Date Range" muncul di halaman utama Performance: kotak memakai lapisan `z-index 30` sedangkan halaman Advanced Statistics / Trader DNA memakai `40`, sehingga kotak tertutup di belakang halaman detail. Saat pengguna menekan kembali, kotak baru terlihat di atas halaman utama. Sekarang kotak memakai lapisan `top` (z-index 80) sehingga langsung tampil di atas Advanced Statistics / Trader DNA.
+- [x] Kotak hanya ditampilkan di halaman Advanced Statistics / Trader DNA, dan otomatis ditutup (dianggap Cancel) bila meninggalkan halaman itu.
+- [x] Urutan kartu Advanced Statistics: judul "Statistik lengkap akun" → Kalender → Monthly gain → kartu lain seperti urutan sebelumnya (grafik Growth, performa per minggu/hari/sesi, dst.).
+- [x] Monthly gain: setiap bulan yang punya trade menampilkan persen di atas batang. Profit hijau (+), rugi merah (-), tampilan sama.
+- [x] Halaman login memakai gambar `login-art.webp` (bidang kuas putih sebagai latar logo EDGE JOURNAL). Berkas baru, ±71 KB, dimasukkan ke cache offline.
+- [x] Diuji: alur rentang tanggal 8 langkah, urutan kartu, label % (bulan profit dan rugi), tampilan login di 2 ukuran layar, regresi login/sinkron.

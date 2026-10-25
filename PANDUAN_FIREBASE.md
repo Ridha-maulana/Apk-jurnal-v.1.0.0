@@ -70,6 +70,14 @@ Setelah akun Anda terdaftar, buka **Authentication → Settings → User actions
 - Jika dua perangkat sama-sama mengubah data saat tidak saling terhubung, aplikasi **tidak menimpa diam-diam**: akan muncul pilihan "Pakai data cloud" atau "Pakai data perangkat ini". Jika Anda memilih data cloud, versi perangkat ini disimpan sebagai cadangan lokal (`edge-journal-pre-sync-backup`).
 - Sinkron hanya berjalan setelah Masuk. Tanpa Masuk, aplikasi bekerja seperti sebelumnya (lokal saja).
 
+## Sinkron belum aktif di browser lain (misalnya Brave)
+Tools → Sinkron online sekarang menampilkan diagnosis kalau belum aktif:
+- **firebase-config.js TIDAK terbaca** → file diblokir, tidak ditemukan, atau yang tersimpan di browser masih versi lama. Tekan **Muat ulang bersih** (data jurnal tidak terhapus).
+- **apiKey / projectId KOSONG** → alamat halaman itu belum memakai `firebase-config.js` yang sudah diisi.
+- **Alamat halaman berbeda** → bandingkan "Alamat" di browser yang berhasil dengan yang belum. Kalau Anda punya lebih dari satu repo GitHub, isi `firebase-config.js` di **setiap** repo yang dipakai. Satu akun Firebase yang sama bisa dipakai di semua alamat.
+- Brave: tekan ikon singa (Shields) lalu matikan untuk situs ini, kemudian muat ulang.
+- Uji langsung: buka `ALAMAT-APLIKASI/firebase-config.js` di browser tersebut. Isinya harus terlihat terisi (bukan kosong atau 404).
+
 ## Jika ada masalah
 - **"Belum diaktifkan"** → `firebase-config.js` masih kosong atau belum terunggah. Buka aplikasi dua kali setelah mengunggah.
 - **"Akses ditolak"** → Rules (langkah 4) belum dipasang atau salah ketik.

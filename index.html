@@ -68,7 +68,9 @@
 .pe-cap{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#aab6cf;margin-top:10px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}.dot.g{background:#34d399}.dot.r{background:#ff6b81}
 .pe-link{background:none;border:0;color:#cfd8f3;font-size:12px;font-weight:700;margin-top:8px;padding:4px 0}.pe-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.pe-chips>div{display:flex;justify-content:space-between;border-radius:10px;padding:9px 10px;font-size:12px}.pe-chips>div.pos{background:#10342b}.pe-chips>div.neg{background:#3a1d29}.pe-chips .neg b{color:#ff8da0}
 .pe-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.pe-head h3{margin:0}
-.pe-months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:108px}.pe-months button{background:none;border:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;padding:4px 1px 0;height:100%;border-radius:8px}.pe-months button.sel{background:#162144}.pe-months i{display:block;width:70%;min-height:2px;border-radius:4px}.pe-months small{font-size:8.5px;color:#7d8bab}.pe-month-val{font-size:8px;line-height:1;white-space:nowrap}.pe-month-val.pos{color:#34d399}.pe-month-val.neg{color:#ff6b81}
+.pe-months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:108px}.pe-months button{background:none;border:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;padding:0;height:100%;border-radius:8px}.pe-months button.sel{background:#162144}.pe-months i{display:block;width:70%;border-radius:4px}.pe-months small{font-size:8.5px;color:#7d8bab}
+.pe-months em.pe-mp{font-style:normal;font-size:7.5px;font-weight:800;letter-spacing:-.25px;line-height:1;white-space:nowrap;color:#7d8bab}
+.pe-months em.pe-mp.pos{color:#34d399}.pe-months em.pe-mp.neg{color:#ff6b81}
 .pe-sum{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.pe-sum>div{background:#0b1222;border-radius:12px;padding:10px}.pe-sum span{display:block;font-size:10px;color:#7d8bab;margin-bottom:5px}.pe-sum b{font-size:16px}
 .pe-best{background:#10342b;border:1px solid #2f8f6f;border-radius:12px;padding:11px 12px;font-size:13px;margin-bottom:12px;line-height:1.5}
 .pe-row{margin-bottom:12px}.pe-row.best .pe-bar{box-shadow:0 0 0 1px #2f8f6f}.pe-rowhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;font-size:13px}.pe-rowhead small{display:block;color:#7d8bab;font-size:10px;margin-top:2px}.pe-meta{display:flex;gap:10px;align-items:center;font-size:11px;color:#8a94ab}.pe-meta b{font-size:13px}
@@ -253,6 +255,10 @@ html,body{background:#090d18}
 .sync-note.warn{color:#ffb4a8}
 .sync-status{margin:6px 0 10px;font-size:13px;font-weight:700;color:#8fa0c8}
 .sync-status.synced{color:#3ddc97}.sync-status.error,.sync-status.conflict{color:#ff9d8a}.sync-status.offline,.sync-status.dirty{color:#f3c969}
+.sync-diag{margin:10px 0;padding:10px 12px;border:1px solid #25304f;border-radius:12px;background:#0b1020;font-size:12.5px;line-height:1.5}
+.sync-diag div{display:flex;flex-direction:column;gap:1px;padding:4px 0;border-bottom:1px solid #1b2440}
+.sync-diag div:last-child{border-bottom:0}
+.sync-diag span{color:#7f8db3}.sync-diag b{color:#e6ecff;word-break:break-all;font-weight:600}
 .sync-conflict{margin:8px 0;padding:10px 12px;border:1px solid #5a3a3a;border-radius:12px;background:rgba(255,120,100,.08);font-size:13px;line-height:1.5;color:#ffd3cb}
 .sync-conflict p{margin:0 0 8px}
 .tool-card .button-row button:disabled{opacity:.5}
@@ -273,6 +279,17 @@ html,body{background:#090d18}
 .gate-link{display:block;margin:16px auto 0;background:none;border:0;color:#7f8db3;font:13px/1.4 Manrope,system-ui,sans-serif;text-decoration:underline;text-align:center}
 .gate-err{margin:12px 0 0!important;color:#ffb4a8!important;font-size:13px!important}
 .gate-note{color:#9aa6c4;font-size:14px;margin:0}
+.gate-art{background:#000;justify-content:flex-start;gap:12px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.gate-art>:first-child{margin-top:auto}.gate-art>:last-child{margin-bottom:auto}
+.gate-hero{--h:min(35vh,88vw);position:relative;flex:none;height:var(--h);width:calc(var(--h)*900/893);background:url(login-art.webp) center/100% 100% no-repeat;animation:gateArt .7s cubic-bezier(.16,1,.3,1) both!important}
+.gate-hero-brand{position:absolute;left:45%;top:45.3%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:calc(var(--h)*.028);white-space:nowrap}
+.gate-hero-mark{display:grid;place-items:center;width:calc(var(--h)*.13);height:calc(var(--h)*.13);border-radius:28%;background:linear-gradient(135deg,#6a8bff,#4564e8);box-shadow:0 6px 18px rgba(69,100,232,.45);color:#fff}
+.gate-hero-mark svg{width:58%;height:58%}
+.gate-hero-brand strong{display:block;font-size:calc(var(--h)*.05);font-weight:800;letter-spacing:.08em;line-height:1.1;color:#0b1228}
+.gate-hero-brand span{display:block;margin-top:calc(var(--h)*.014);font-size:calc(var(--h)*.026);letter-spacing:.2em;line-height:1;color:#4b5676;font-weight:600}
+.gate-art .gate-box{background:rgba(10,15,30,.94);backdrop-filter:blur(6px)}
+@media(max-height:700px){.gate-art .gate-box>p:not(.gate-err){display:none}.gate-art{gap:6px}}
+@keyframes gateArt{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){#splash,#splash *{animation:none!important;transition:none!important}#splash .sp-text strong,#splash .sp-text span{opacity:1!important}}
 </style>
 </head>
@@ -322,7 +339,7 @@ window.__hideSplash=function(){
 window.addEventListener("error",function(e){var b=document.getElementById("boot");if(b&&!window.__appMounted)b.textContent="Error: "+e.message;});
 "use strict";
 const { useEffect, useMemo, useRef, useState } = React;
-const APP_VERSION = '2.4.2';
+const APP_VERSION = '2.5.0';
 const ICONS = { "Activity": [["polyline", { "points": "22 12 18 12 15 21 9 3 6 12 2 12" }]], "ArrowDownRight": [["path", { "d": "M7 7l10 10" }], ["path", { "d": "M17 7v10H7" }]], "ArrowUpRight": [["path", { "d": "M7 17L17 7" }], ["path", { "d": "M7 7h10v10" }]], "BarChart3": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M18 17V9" }], ["path", { "d": "M13 17V5" }], ["path", { "d": "M8 17v-3" }]], "BookOpen": [["path", { "d": "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" }], ["path", { "d": "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" }]], "CalendarDays": [["rect", { "x": 3, "y": 4, "width": 18, "height": 18, "rx": 2 }], ["path", { "d": "M16 2v4" }], ["path", { "d": "M8 2v4" }], ["path", { "d": "M3 10h18" }], ["path", { "d": "M8 14h.01" }], ["path", { "d": "M12 14h.01" }], ["path", { "d": "M16 14h.01" }], ["path", { "d": "M8 18h.01" }], ["path", { "d": "M12 18h.01" }], ["path", { "d": "M16 18h.01" }]], "Camera": [["path", { "d": "M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" }], ["circle", { "cx": 12, "cy": 13, "r": 3 }]], "ChevronDown": [["path", { "d": "M6 9l6 6 6-6" }]], "ChevronLeft": [["path", { "d": "M15 18l-6-6 6-6" }]], "ChevronRight": [["path", { "d": "M9 18l6-6-6-6" }]], "CircleHelp": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["path", { "d": "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" }], ["path", { "d": "M12 17h.01" }]], "ClipboardPaste": [["path", { "d": "M15 2H9a1 1 0 0 0-1 1v2c0 .6.4 1 1 1h6c.6 0 1-.4 1-1V3c0-.6-.4-1-1-1z" }], ["path", { "d": "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" }]], "Cloud": [["path", { "d": "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z" }]], "Download": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M7 10l5 5 5-5" }], ["path", { "d": "M12 15V3" }]], "FileJson": [["path", { "d": "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }], ["path", { "d": "M14 2v6h6" }], ["path", { "d": "M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1" }], ["path", { "d": "M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1" }]], "Filter": [["path", { "d": "M22 3H2l8 9.46V19l4 2v-8.54z" }]], "LineChart": [["path", { "d": "M3 3v18h18" }], ["path", { "d": "M19 9l-5 5-4-4-3 3" }]], "Plus": [["path", { "d": "M5 12h14" }], ["path", { "d": "M12 5v14" }]], "Search": [["circle", { "cx": 11, "cy": 11, "r": 8 }], ["path", { "d": "M21 21l-4.3-4.3" }]], "Settings2": [["path", { "d": "M20 7h-9" }], ["path", { "d": "M14 17H5" }], ["circle", { "cx": 17, "cy": 17, "r": 3 }], ["circle", { "cx": 7, "cy": 7, "r": 3 }]], "Share2": [["circle", { "cx": 18, "cy": 5, "r": 3 }], ["circle", { "cx": 6, "cy": 12, "r": 3 }], ["circle", { "cx": 18, "cy": 19, "r": 3 }], ["path", { "d": "M8.59 13.51l6.83 3.98" }], ["path", { "d": "M15.41 6.51l-6.82 3.98" }]], "SlidersHorizontal": [["path", { "d": "M21 4h-7" }], ["path", { "d": "M10 4H3" }], ["path", { "d": "M21 12h-9" }], ["path", { "d": "M8 12H3" }], ["path", { "d": "M21 20h-5" }], ["path", { "d": "M12 20H3" }], ["path", { "d": "M14 2v4" }], ["path", { "d": "M8 10v4" }], ["path", { "d": "M16 18v4" }]], "Target": [["circle", { "cx": 12, "cy": 12, "r": 10 }], ["circle", { "cx": 12, "cy": 12, "r": 6 }], ["circle", { "cx": 12, "cy": 12, "r": 2 }]], "Trash2": [["path", { "d": "M3 6h18" }], ["path", { "d": "M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" }], ["path", { "d": "M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" }], ["path", { "d": "M10 11v6" }], ["path", { "d": "M14 11v6" }]], "TrendingDown": [["path", { "d": "M22 17l-8.5-8.5-5 5L2 7" }], ["path", { "d": "M16 17h6v-6" }]], "TrendingUp": [["path", { "d": "M22 7l-8.5 8.5-5-5L2 17" }], ["path", { "d": "M16 7h6v6" }]], "Upload": [["path", { "d": "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }], ["path", { "d": "M17 8l-5-5-5 5" }], ["path", { "d": "M12 3v12" }]], "UserRound": [["circle", { "cx": 12, "cy": 8, "r": 5 }], ["path", { "d": "M20 21a8 8 0 0 0-16 0" }]], "Wallet": [["path", { "d": "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" }], ["path", { "d": "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" }]], "X": [["path", { "d": "M18 6L6 18" }], ["path", { "d": "M6 6l12 12" }]], "Zap": [["path", { "d": "M13 2L3 14h9l-1 8 10-12h-9l1-8z" }]] };
 function Icon({ name, size = 24, strokeWidth = 2, className, style }) {
     const node = ICONS[name] || [];
@@ -1123,6 +1140,7 @@ function PerfExtra({ account, trades, filtered, total, maxDd, onSelectDate, view
     const mon = Array.from({ length: 12 }, (_, i) => { const xs = allClosed.filter(t => { const w = wib(t.date); return Number(w.year) === year && w.mi === i; }); return { i, n: xs.length, pnl: sumOf(xs, t => t.pnl), wins: xs.filter(t => t.pnl > 0).length }; });
     const MN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
     const ms = mon[mSel];
+    const mpct = v => { const p = v / (start || 1) * 100, a = Math.abs(p); return (p > 0.004 ? '+' : p < -0.004 ? '-' : '') + (a >= 10 ? a.toFixed(1) : a.toFixed(2)) + '%'; };
     const syms = [...new Set(sorted.map(t => t.symbol))].map(s => { const xs = sorted.filter(t => t.symbol === s); return { s, n: xs.length, pnl: sumOf(xs, t => t.pnl) }; }).sort((a, b) => b.n - a.n);
     const maxSym = Math.max(1, ...syms.map(x => Math.abs(x.pnl)));
     const sess = SESSIONS.map(s => { const xs = sorted.filter(t => s.test(wib(t.date).hour)); return { ...s, n: xs.length, wr: xs.length ? xs.filter(t => t.pnl > 0).length / xs.length * 100 : 0, pnl: sumOf(xs, t => t.pnl) }; });
@@ -1222,7 +1240,7 @@ function PerfExtra({ account, trades, filtered, total, maxDd, onSelectDate, view
                             v.n,
                             " posisi"))); })),
             React.createElement("p", { className: "pe-note" }, "Ketuk tanggal yang punya posisi untuk membuka jurnal hari itu.")),
-React.createElement("div", { className: "pe-card" },
+        React.createElement("div", { className: "pe-card" },
             React.createElement("div", { className: "pe-head" },
                 React.createElement("h3", null, "Monthly gain"),
                 React.createElement("div", { className: "pe-years" },
@@ -1230,7 +1248,7 @@ React.createElement("div", { className: "pe-card" },
                     React.createElement("span", null, year),
                     React.createElement("button", { onClick: () => onPickMonth(year + 1, mSel) }, "\u203A"))),
             React.createElement("div", { className: "pe-months" }, mon.map(m => { const mx = Math.max(1, ...mon.map(z => Math.abs(z.pnl))); return React.createElement("button", { key: m.i, className: mSel === m.i ? 'sel' : '', onClick: () => onPickMonth(year, m.i) },
-                React.createElement("b", { className: `pe-month-val ${tone(m.pnl)}` }, m.n ? pcs(m.pnl, start) : '0.00%'),
+                m.n > 0 && React.createElement("em", { className: `pe-mp ${m.pnl > 0 ? 'pos' : m.pnl < 0 ? 'neg' : ''}` }, mpct(m.pnl)),
                 React.createElement("i", { style: { height: `${m.n ? Math.max(6, Math.abs(m.pnl) / mx * 60) : 2}px`, background: m.pnl >= 0 ? '#34d399' : '#ff6b81', opacity: m.n ? 1 : .25 } }),
                 React.createElement("small", null, MN[m.i])); })),
             React.createElement("div", { className: "pe-sum" },
@@ -1250,7 +1268,7 @@ React.createElement("div", { className: "pe-card" },
                     React.createElement("b", null,
                         ms.n ? Math.round(ms.wins / ms.n * 100) : 0,
                         "%")))),
-React.createElement("div", { className: "pe-card" },
+        React.createElement("div", { className: "pe-card" },
             React.createElement("div", { className: "pe-tabs" }, [['growth', 'Growth'], ['balance', 'Balance'], ['profit', 'Profit'], ['daily', 'Daily P&L'], ['dd', 'Drawdown']].map(([k, l]) => React.createElement("button", { key: k, className: ct === k ? 'on' : '', onClick: () => setCt(k) }, l))),
             React.createElement("p", { className: "pe-sub" }, CT.t),
             React.createElement(MiniChart, { key: ct, vals: CT.v, labels: lab, kind: CT.k, fmt: CT.f }),
@@ -1493,6 +1511,8 @@ function Performance({ onSelectDate, onWallet, account, trades, period, setPerio
     const [view, setView] = useState(() => { const n = new Date(); return { y: n.getFullYear(), m: n.getMonth() }; });
     useEffect(() => { if (performanceView !== 'overview')
         window.scrollTo({ top: 0, behavior: 'auto' }); }, [performanceView]);
+    useEffect(() => { if (performanceView === 'overview' && rangeOpen) { setRangeOpen(false); if (!customStart && !customEnd)
+        setPeriod('All time'); } }, [performanceView]);
     const pickMonth = (y, m) => { const p2 = n => String(n).padStart(2, '0'); setView({ y, m }); setCustomStart(`${y}-${p2(m + 1)}-01`); setCustomEnd(`${y}-${p2(m + 1)}-${p2(new Date(y, m + 1, 0).getDate())}`); setPeriod('Custom date range'); };
     const filtered = trades.filter(t => t.status === 'closed' && withinPeriod(t.date, period, customStart, customEnd));
     const total = filtered.reduce((a, t) => a + (Number(t.pnl) || 0), 0);
@@ -1651,10 +1671,9 @@ function Performance({ onSelectDate, onWallet, account, trades, period, setPerio
                         React.createElement("strong", null, performanceView === 'advanced' ? 'Advanced Statistics' : 'Trader DNA'),
                         React.createElement("span", null, `Analisis ${period.toLowerCase()} · ${account.name}`)),
                     React.createElement("span", { className: "performance-detail-badge" }, performanceView === 'advanced' ? 'STAT' : 'DNA')),
-                performanceView === 'advanced' && React.createElement("div", { className: "detail-period-section advanced-period-section" }, periodBlock),
+                periodBlock,
                 performanceView === 'advanced' && React.createElement(AdvancedStats, { account: account, filtered: filtered, total: total, maxDd: maxDd, hwm: hwm, view: view, part: 'title' }),
                 performanceView === 'advanced' && React.createElement(PerfExtra, { account: account, trades: trades, filtered: filtered, total: total, maxDd: maxDd, onSelectDate: onSelectDate, view: view, onPickMonth: pickMonth, onResetAll: () => setPeriod('All time'), rangeText: periodTxt, mode: 'advanced', advancedStats: React.createElement(AdvancedStats, { account: account, filtered: filtered, total: total, maxDd: maxDd, hwm: hwm, view: view, part: 'card' }) }),
-                performanceView === 'dna' && React.createElement("div", { className: "detail-period-section dna-period-section" }, periodBlock),
                 performanceView === 'dna' && React.createElement(PerfExtra, { account: account, trades: trades, filtered: filtered, total: total, maxDd: maxDd, onSelectDate: onSelectDate, view: view, onPickMonth: pickMonth, onResetAll: () => setPeriod('All time'), rangeText: periodTxt, mode: 'dna' }))),
         shareOpen && ReactDOM.createPortal(React.createElement("div", { className: "modal-backdrop center top", onClick: e => { if (e.target === e.currentTarget) {
                 setShareOpen(false);
@@ -1670,7 +1689,7 @@ function Performance({ onSelectDate, onWallet, account, trades, period, setPerio
                     React.createElement("button", { type: "button", onClick: () => { setShareOpen(false); setShareUrl(''); } }, "Tutup"),
                     React.createElement("button", { type: "button", onClick: saveShare }, "Simpan"),
                     React.createElement("button", { type: "button", className: "primary", onClick: doShare }, "Bagikan")))), document.body),
-        rangeOpen && React.createElement("div", { className: "modal-backdrop center" },
+        rangeOpen && performanceView !== 'overview' && React.createElement("div", { className: "modal-backdrop center top" },
             React.createElement("div", { className: "range-dialog" },
                 React.createElement("h3", null, "Custom Date Range"),
                 React.createElement("label", null,
@@ -1805,6 +1824,11 @@ function TradeCard({ trade, expanded, onToggle, onDelete, onClose, onEdit }) { v
             React.createElement("button", { className: "delete-btn", onClick: e => { e.stopPropagation(); onDelete(); } },
                 React.createElement(Trash2, { size: 14 }),
                 " Hapus")))); }
+async function cleanReload() {
+    try { const rs = await navigator.serviceWorker.getRegistrations(); await Promise.all(rs.map(r => r.unregister())); } catch (e) { }
+    try { const ks = await caches.keys(); await Promise.all(ks.map(k => caches.delete(k))); } catch (e) { }
+    location.reload();
+}
 function markSignedOut() {
     try { localStorage.removeItem('edge-auth-hint'); } catch (e) { }
     try { sessionStorage.removeItem('edge-gate-skip'); } catch (e) { }
@@ -1872,6 +1896,10 @@ function AuthGate({ children }) {
         try { await fn(); } catch (e) { setMsg((e && e.message) || 'Terjadi kesalahan.'); }
         setBusy(false);
     }
+    const heroBrand = React.createElement("div", { className: "gate-hero" },
+        React.createElement("div", { className: "gate-hero-brand" },
+            React.createElement("div", { className: "gate-hero-mark" }, React.createElement(Zap, { size: 26 })),
+            React.createElement("div", null, React.createElement("strong", null, "EDGE JOURNAL"), React.createElement("span", null, "TRADING LOGBOOK"))));
     const brand = React.createElement("div", { className: "gate-brand" },
         React.createElement("div", { className: "gate-mark" }, React.createElement(Zap, { size: 30 })),
         React.createElement("div", null, React.createElement("strong", null, "EDGE JOURNAL"), React.createElement("span", null, "TRADING LOGBOOK")));
@@ -1885,10 +1913,10 @@ function AuthGate({ children }) {
             React.createElement("button", { className: "gate-sec", style: { width: '100%', marginTop: 10 }, onClick: () => { if (window.confirm('Data di cloud akan diganti dengan data perangkat ini. Lanjutkan?')) run(() => cs.resolveConflict('local')); } }, "Pakai data perangkat ini"),
             msg && React.createElement("p", { className: "gate-err" }, msg)));
     const err = msg || (st && st.state === 'offline' && st.message) || '';
-    return React.createElement("div", { className: "gate" }, brand,
+    return React.createElement("div", { className: "gate gate-art" }, heroBrand,
         React.createElement("form", { className: "gate-box", onSubmit: e => { e.preventDefault(); if (email && pw) run(() => cs.signIn(email, pw)); } },
             React.createElement("h1", null, "Masuk"),
-            React.createElement("p", null, "Data jurnal Anda tersimpan online di akun ini dan otomatis muncul di perangkat mana pun."),
+            React.createElement("p", null, "Data jurnal tersimpan online di akun Anda dan otomatis muncul di perangkat mana pun."),
             React.createElement("label", null, "Email",
                 React.createElement("input", { type: "email", name: "email", autoComplete: "username", inputMode: "email", value: email, onChange: e => setEmail(e.target.value), placeholder: "email@anda.com" })),
             React.createElement("label", null, "Password",
@@ -1924,8 +1952,22 @@ function CloudSyncCard() {
             React.createElement("h2", null, "Sinkron online"),
             React.createElement("p", null, "Data tersimpan di akun Anda dan bisa dibuka dari browser atau HP mana pun.")));
     if (!st) return React.createElement("div", { className: "tool-card" }, head, React.createElement("p", { className: "sync-note" }, "Memuat layanan online…"));
-    if (!st.configured) return React.createElement("div", { className: "tool-card" }, head,
-        React.createElement("p", { className: "sync-note" }, "Belum diaktifkan. Isi file firebase-config.js mengikuti PANDUAN_FIREBASE.md, lalu unggah ke GitHub."));
+    if (!st.configured) {
+        const fc = window.FIREBASE_CONFIG;
+        const rows = [
+            ['Alamat halaman', location.origin + location.pathname],
+            ['firebase-config.js', fc ? 'terbaca' : 'TIDAK terbaca (diblokir / tidak ditemukan / cache lama)'],
+            ['apiKey', fc && fc.apiKey ? 'terisi' : 'KOSONG'],
+            ['projectId', fc && fc.projectId ? 'terisi' : 'KOSONG'],
+            ['Versi aplikasi', APP_VERSION]
+        ];
+        return React.createElement("div", { className: "tool-card" }, head,
+            React.createElement("p", { className: "sync-note" }, "Belum aktif di browser ini. Penyebab umum: file lama masih tersimpan di cache browser, atau alamat halaman ini berbeda dengan alamat yang sudah diisi Firebase."),
+            React.createElement("div", { className: "sync-diag" }, rows.map(r => React.createElement("div", { key: r[0] }, React.createElement("span", null, r[0]), React.createElement("b", null, r[1])))),
+            React.createElement("div", { className: "button-row" },
+                React.createElement("button", { className: "secondary-btn", onClick: cleanReload }, "Muat ulang bersih")),
+            React.createElement("p", { className: "sync-note" }, "Tombol ini hanya membersihkan cache aplikasi. Data jurnal tidak dihapus."));
+    }
     const time = st.lastSyncAt ? new Date(st.lastSyncAt).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '';
     const label = { synced: 'Tersinkron' + (time ? ' · ' + time : ''), syncing: 'Menyinkronkan…', dirty: 'Perubahan menunggu dikirim…', offline: 'Offline — dikirim saat online', conflict: 'Perlu pilihan Anda', error: 'Gagal sinkron' }[st.state] || '';
     if (!st.user) return React.createElement("div", { className: "tool-card" }, head,
@@ -1941,6 +1983,7 @@ function CloudSyncCard() {
         (msg || st.message) && React.createElement("p", { className: "sync-note warn" }, msg || st.message));
     return React.createElement("div", { className: "tool-card" }, head,
         React.createElement("p", { className: "sync-note" }, "Masuk sebagai ", React.createElement("strong", null, st.user.email)),
+        React.createElement("p", { className: "sync-note" }, "Alamat aplikasi: ", React.createElement("strong", null, location.origin + location.pathname)),
         React.createElement("p", { className: 'sync-status ' + st.state }, label),
         st.state === 'conflict' && React.createElement("div", { className: "sync-conflict" },
             React.createElement("p", null, st.message),
