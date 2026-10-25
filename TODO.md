@@ -195,3 +195,10 @@
 ## Pembagian sesi baru v2.5.1
 - [x] Performa per sesi (WIB, jam entry) memakai pembagian baru: Asia 06.00–12.00, London 12.00–20.00, New York 20.00–04.00 (melewati tengah malam), Overlap 04.00–06.00. Menggantikan pembagian lama (London–New York dan "Sepi" dihapus).
 - [x] Catatan di bawah kartu ikut diperbarui. Diuji: trade pada jam 0, 3, 4, 5, 6, 11, 12, 19, 20, 23 masuk ke sesi yang benar, total 10 dari 10 posisi.
+
+## Menu bawah 5 slot + halaman Akun v2.6.0
+- [x] Urutan menu bawah (kiri ke kanan): Performance, My Journal, tombol Tambah posisi (tengah), Tools, Akun. Menu samping (desktop) juga mendapat item Akun.
+- [x] Tombol tengah "Tambah posisi": ikon candlestick + plus (baru), tanpa tulisan, membuka form Tambah trade dari halaman mana pun. Getar sedikit lebih kuat dari menu biasa.
+- [x] Menu Akun (ikon orang, ada tulisan): halaman baru berisi kartu Sinkron online (masuk/keluar, status), kartu Akun trading (nama, saldo, jumlah trade; tombol Kelola/ganti akun, Deposit/WD, Tambah akun, Backup), dan versi aplikasi. Kartu di Tools tetap ada.
+- [x] Ikon lama (Performance, My Journal, Tools) tidak diubah. Lebar menu menyesuaikan 5 slot; layar ≤380px memakai tulisan lebih kecil.
+- [x] Diuji di layar 390 dan 360: urutan, tombol + tepat di tengah, tidak ada tulisan terpotong, semua menu membuka halaman yang benar, regresi login/sinkron/Advanced Statistics lolos.

@@ -1,7 +1,6 @@
-Edge Journal v2.5.1 — Pembagian sesi baru
+Edge Journal v2.6.0 — Menu bawah 5 slot + halaman Akun
 
-Perubahan:
-  Asia 06.00-12.00 | London 12.00-20.00 | New York 20.00-04.00 | Overlap 04.00-06.00 (WIB, jam entry)
+Urutan menu bawah: Performance | My Journal | [+ Tambah posisi] | Tools | Akun
 
 File yang perlu di-commit (3 file):
   index.html
@@ -12,7 +11,7 @@ File yang perlu di-commit (3 file):
 
 Perintah:
   git add index.html TODO.md UPLOAD_ONLY_CHANGED_FILES.txt
-  git commit -m "v2.5.1: pembagian sesi Asia/London/New York/Overlap"
+  git commit -m "v2.6.0: menu bawah 5 slot, tombol tambah posisi, halaman Akun"
   git push
 
 Setelah upload: buka aplikasi 2 kali (kali pertama mengunduh versi baru di belakang layar).
